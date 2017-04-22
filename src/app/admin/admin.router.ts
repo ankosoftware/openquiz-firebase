@@ -9,9 +9,15 @@ import { QuizService } from "../common/firebase/services/quiz.service";
 import {Transition} from "ui-router-core/lib";
 import {AuthService} from "../common/firebase/services/auth.service";
 import {TopicService} from "../common/firebase/services/topic.service";
+import {Query} from "angularfire2/interfaces";
 
-export function resolveQuizzes(quizService: QuizService) {
-  return quizService.list().first().toPromise();
+export function resolveQuizzes(quizService: QuizService, transition: Transition) {
+  const query:Query = {
+    orderByChild: 'name',
+    startAt: +transition.params().skip || 0,
+    limitToFirst: +transition.params().limit || 10
+  };
+  return quizService.list(query).first().toPromise();
 }
 
 export function resolveQuiz(quizService: QuizService, transition: Transition)  {
@@ -39,11 +45,11 @@ export const states = [
   },
   {
     name: 'admin.quizzes',
-    url: '/quizzes',
+    url: '/quizzes?:skip?:limit',
     component: QuizzesComponent,
     resolve: [{
         token: 'quizzes',
-        deps: [QuizService],
+        deps: [QuizService, Transition],
         resolveFn: resolveQuizzes
       }]
   },

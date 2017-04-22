@@ -18,11 +18,13 @@ export class Quiz extends Base implements IQuiz{
   isPublic: boolean;
   topics: string[];
   questions: string[];
+  createdAt: Date;
 
   constructor(json?: IQuiz) {
     super(json);
     this.topics = this.topics || [];
     this.questions = this.questions || [];
     this.isPublic =  this.isPublic || false;
+    this.createdAt = this.createdAt || new Date();
   }
 }

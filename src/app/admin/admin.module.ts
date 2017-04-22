@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { GeneralModule } from '../common/general.module';
 import { routing } from './admin.router';
-
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizzesComponent } from './quizzes/list/quizzes.component';

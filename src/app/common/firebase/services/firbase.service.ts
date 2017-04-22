@@ -6,6 +6,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {ObservableInput} from "rxjs/Observable";
 import {UIRouter} from "ui-router-ng2";
+import {Query} from "angularfire2/interfaces";
 
 export abstract class FirebaseService<T extends Base> {
 
@@ -37,8 +38,8 @@ export abstract class FirebaseService<T extends Base> {
     return this.db.object(this.url + `/${key}`);
   }
 
-  protected items(): FirebaseListObservable<T[]> {
-    return this.db.list(this.url);
+  protected items(query: Query={}): FirebaseListObservable<T[]> {
+    return this.db.list(this.url, {query});
   }
 
   create(item: T): Promise<T> {
@@ -47,8 +48,8 @@ export abstract class FirebaseService<T extends Base> {
         .then(ref => this.get(ref.key).first().toPromise());
   }
 
-  list(query?: any): Observable<T[]> {
-    return this.items().map(json => this.arrayToModel(json)).catch((err, caught) => this.errorHandler(err, caught));
+  list(query?: Query): Observable<T[]> {
+    return this.items(query).map(json => this.arrayToModel(json)).catch((err, caught) => this.errorHandler(err, caught));
   }
 
   getList(keys: string[]): Promise<T[]> {
