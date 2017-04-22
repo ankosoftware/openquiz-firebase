@@ -2,6 +2,7 @@ import {AngularFire, AngularFireDatabase, FirebaseListObservable, FirebaseObject
 import {Observable} from "rxjs";
 import {Thenable} from "firebase";
 import {Base} from "../../model/base.model";
+import "rxjs/add/operator/map";
 
 export abstract class FirebaseService<T extends Base> {
 
@@ -11,10 +12,14 @@ export abstract class FirebaseService<T extends Base> {
     this.db = af.database;
   }
 
-  abstract toModel(json: any): T;
+  protected abstract toModel(json: any): T;
 
-  protected object(): FirebaseObjectObservable<T> {
-    return this.db.object(this.url);
+  protected arrayToModel(array: any[]): T[] {
+    return array && array.map(this.toModel);
+  }
+
+  protected object(key: string): FirebaseObjectObservable<T> {
+    return this.db.object(this.url + `/${key}`);
   }
 
   protected items(): FirebaseListObservable<T[]> {
@@ -25,16 +30,18 @@ export abstract class FirebaseService<T extends Base> {
     return item && this.items().push(item.toDB()).then(this.toModel);
   }
 
-  list(query: any): Thenable<Array<T>> {
-    return null;
+  list(query?: any): Observable<T[]> {
+    let res = new Observable();
+    this.items().subscribe();//.subscribe(this.arrayToModel);
+    return this.items().map(json => this.arrayToModel(json));
   }
 
-  get(): Observable<T> {
-    return null;
+  get(key: string): Observable<T> {
+    return key && this.object(key).map(json => this.toModel(json));
   }
 
   update(item: T): Thenable<void> {
-    return item && this.items().update(item.id, item.toDB());
+    return item && item.id && this.items().update(item.id, item.toDB());
   }
 
   remove(key): Thenable<void> {

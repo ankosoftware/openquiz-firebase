@@ -17,6 +17,11 @@ export class AuthService {
       provider: AuthProviders.Github,
       method: AuthMethods.Redirect});
   }
+  loginFacebook() {
+    this.af.auth.login({
+      provider: AuthProviders.Facebook,
+      method: AuthMethods.Redirect});
+  }
   logout() {
     this.af.auth.login();
   }

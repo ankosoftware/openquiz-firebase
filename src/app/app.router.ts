@@ -2,7 +2,6 @@ import { UIRouterModule } from 'ui-router-ng2';
 import { ModuleWithProviders } from '@angular/core';
 import {LandingComponent} from "./landing/landing.component";
 
-
 export const states = [
   {
     name: 'home',

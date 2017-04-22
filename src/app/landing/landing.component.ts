@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
       bla-bla
     </p>
     <p>
-      <a href="#">login</a>
+      <a uiSref="login">login</a>
     </p>
   `
 })
