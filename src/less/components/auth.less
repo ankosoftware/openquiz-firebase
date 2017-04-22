@@ -1,0 +1,47 @@
+.auth {
+  &-row {
+    & > *[class*="col-lg"] {
+      min-height: 100vh;
+    }
+  }
+
+  &-column {
+    display: table;
+    background-color: white;
+  }
+
+  &-container {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 30px;
+  }
+
+  &-hero {
+    background: url('/assets/images/login-hero.jpg') no-repeat 50% 50%;
+    background-size: cover;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: fade(@brand-secondary, 22%);
+    }
+  }
+
+  &-header {
+    letter-spacing: -.025em;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  &-description {
+    margin-bottom: 35px;
+    font-size: 15px;
+    color: fade(black, 58%);
+  }
+}
