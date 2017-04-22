@@ -26,8 +26,6 @@ export class AuthService {
     this.af.auth.login();
   }
   getUser() {
-    return this.af.auth.map((data)=>{
-      return data && data.auth;
-    }).first().toPromise();
+    return this.af.auth.first().toPromise().then((data) => data && data.auth);
   }
 }

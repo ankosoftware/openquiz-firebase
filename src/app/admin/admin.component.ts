@@ -7,12 +7,8 @@ import {AuthService} from "../common/firebase/services/auth.service";
 export class AdminComponent {
   user: any;
   constructor(private authService: AuthService) {
-
-  }
-  getUser() {
-    return this.authService.getUser().then((user)=>{
+    this.authService.getUser().then((user)=> {
       this.user = user;
-      console.log(user);
-    })
+    });
   }
 }
