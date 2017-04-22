@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import {AngularFireModule, AuthMethods, AuthProviders} from "angularfire2";
+import {FirebaseService} from "./services/firbase.service";
+import {AuthService} from "./services/auth.service";
 
 const myFirebaseConfig = {
   apiKey: "AIzaSyCpB9v4KCqezTbJv1GGYSy-NVh5m8PeTbU",
@@ -16,16 +18,12 @@ const myFirebaseAuthConfig = {
 };
 
 @NgModule({
-  declarations: [
-  ],
   imports: [
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
   ],
-  exports: [
-  ],
   providers: [
-  ],
-  entryComponents: [
+      AuthService,
+      FirebaseService
   ]
 })
 export class FirebaseModule {

@@ -4,4 +4,4 @@ import { FirebaseModule } from './firebase/firebase.module';
 @NgModule({
   imports: [FirebaseModule]
 })
-export class CommonModule {}
+export class GeneralModule {}
