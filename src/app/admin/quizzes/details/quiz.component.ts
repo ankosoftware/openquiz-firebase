@@ -24,7 +24,10 @@ export class QuizComponent {
       }
       else {
         this.topicService.create(topic).then(()=>{
-
+          if(!this.quiz.topics) {
+            this.quiz.topics = [];
+          }
+          this.quiz.topics.push(topic.id);
         });
       }
     });
