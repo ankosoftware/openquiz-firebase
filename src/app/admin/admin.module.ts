@@ -9,6 +9,7 @@ import { QuizzesComponent } from './quizzes/quizzes.component';
 import { QuizComponent } from './quizzes/quiz.component';
 import { NewQuizComponent } from './quizzes/new-quiz.component';
 import { NewTopicComponent } from './quizzes/new-topic.component';
+import { TopicComponent } from './topics/topic.component';
 import {GeneralModule} from "../common/general.module";
 
 @NgModule({
@@ -24,7 +25,8 @@ import {GeneralModule} from "../common/general.module";
     QuizzesComponent,
     QuizComponent,
     NewQuizComponent,
-    NewTopicComponent
+    NewTopicComponent,
+    TopicComponent
   ],
   entryComponents: [
     NewQuizComponent,
