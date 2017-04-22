@@ -6,6 +6,8 @@ import { routing } from './admin.router';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
+import { QuizComponent } from './quizzes/quiz.component';
+import { NewQuizComponent } from './quizzes/new-quiz.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,12 @@ import { QuizzesComponent } from './quizzes/quizzes.component';
   declarations: [
     AdminComponent,
     DashboardComponent,
-    QuizzesComponent
+    QuizzesComponent,
+    QuizComponent,
+    NewQuizComponent
+  ],
+  entryComponents: [
+    NewQuizComponent
   ]
 })
 export class AdminModule {}

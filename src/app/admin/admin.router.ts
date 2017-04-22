@@ -3,7 +3,7 @@ import { UIRouterModule } from 'ui-router-ng2';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
-
+import { QuizComponent } from './quizzes/quiz.component';
 
 export const states = [
   {
@@ -15,6 +15,11 @@ export const states = [
     name: 'admin.quizzes',
     url: '/quizzes',
     component: QuizzesComponent
+  },
+  {
+    name: 'admin.quiz',
+    url: '/quizzes/:quizId',
+    component: QuizComponent
   }
 ];
 
