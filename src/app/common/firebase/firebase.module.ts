@@ -22,8 +22,7 @@ const myFirebaseAuthConfig = {
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
   ],
   providers: [
-      AuthService,
-      FirebaseService
+      AuthService
   ]
 })
 export class FirebaseModule {
