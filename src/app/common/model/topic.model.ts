@@ -1,14 +1,13 @@
 import {Base} from "./base.model";
 
-export class Quiz extends Base {
+export class Topic extends Base {
 
   name: string;
+  // TODO: enum
+  type: string;
   description: string;
-  questions: string[];
-  timeAllowed: {
-    perQuestion: number,
-    total: number
-  };
+  answers: string[];
+  correctAnswer: string;
 
   constructor(json?: any) {
     super(json);
