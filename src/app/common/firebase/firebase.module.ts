@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import {AngularFireModule, AuthMethods, AuthProviders} from "angularfire2";
-import {FirebaseService} from "./services/firbase.service";
 import {AuthService} from "./services/auth.service";
 
 const myFirebaseConfig = {
