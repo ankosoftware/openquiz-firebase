@@ -75,7 +75,7 @@ export const states = [
   },
   {
     name: 'admin.question',
-    url: '/quizzes/:quizId/topic/:topicId/question/:questionId',
+    url: '/quizzes/:quizId/topic/:topicId/question',
     component: QuestionComponent
   }
 ];

@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="container-fluid">
-  <a class="btn btn-raised btn-primary">
+  <a class="btn btn-raised btn-primary" uiSref="admin.question" [uiParams]="{ quizId: quizId,  topicId: topic.id}">
     Add Question
   </a>
   <div class="well well-lg">
