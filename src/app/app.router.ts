@@ -3,6 +3,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { LandingComponent } from "./landing/landing.component";
 import { AuthService } from "./common/firebase/services/auth.service";
 
+export function resolveUser(authService:AuthService) { return authService.getUser() }
+
 export const states = [
   {
     name: 'home',
@@ -11,9 +13,8 @@ export const states = [
     resolve: [{
       token: 'user',
       deps: [AuthService],
-      resolveFn: authService => authService.getUser()
+      resolveFn: resolveUser
     }]
-
   }
 ];
 

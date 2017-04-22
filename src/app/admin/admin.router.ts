@@ -8,6 +8,14 @@ import { QuestionComponent } from './questions/question.component';
 import { QuizService } from "../common/firebase/services/quiz.service";
 import {Transition} from "ui-router-core/lib";
 
+export function resolveQuizzes(quizService: QuizService) {
+  return quizService.list().first().toPromise();
+}
+
+export function resolveQuiz(quizService: QuizService, transition: Transition)  {
+  return quizService.get(transition.params().quizId).first().toPromise();
+}
+
 export const states = [
   {
     name: 'admin',
@@ -21,9 +29,7 @@ export const states = [
     resolve: [{
         token: 'quizzes',
         deps: [QuizService],
-        resolveFn: (quizService: QuizService) => {
-          return quizService.list().first().toPromise();
-        }
+        resolveFn: resolveQuizzes
       }
     ]
   },
@@ -34,11 +40,8 @@ export const states = [
     resolve: [{
       token: 'quiz',
       deps: [QuizService, Transition],
-      resolveFn: (quizService: QuizService, transition: Transition) => {
-        return quizService.get(transition.params().quizId).first().toPromise();
-      }
-    }
-    ]
+      resolveFn: resolveQuiz
+    }]
   },
   {
     name: 'admin.topic',

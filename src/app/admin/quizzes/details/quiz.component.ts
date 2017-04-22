@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { NewTopicComponent } from '../../topics/new/new-topic.component';
 import {Quiz} from "../../../common/model/quiz.model";
@@ -10,25 +10,35 @@ import {TopicService} from "../../../common/firebase/services/topic.service";
   inputs: ['quiz'],
   templateUrl: './quiz.component.html'
 })
-export class QuizComponent {
+export class QuizComponent implements OnInit{
   @Input() quiz: Quiz;
-  constructor(protected dialogService: DialogService, private quizService: QuizService, private topicService:TopicService) {
+  topics: Topic[] = [];
+  constructor(protected dialogService: DialogService, private quizService: QuizService, private topicService:TopicService, private chRef: ChangeDetectorRef) {}
 
+  ngOnInit(): void {
+    this.topicService.getList(this.quiz.topics).then((topics) => {
+      this.topics = topics;
+    });
   }
+
   editTopic(topic: Topic = new Topic()) {
     this.dialogService.addDialog(NewTopicComponent, topic).subscribe((topic) => {
-      if(topic.id) {
-        this.topicService.update(topic).then(()=>{
-
-        });
-      }
-      else {
-        this.topicService.create(topic).then(()=>{
-          if(!this.quiz.topics) {
-            this.quiz.topics = [];
-          }
-          this.quiz.topics.push(topic.id);
-        });
+      if(topic) {
+        if (topic.id) {
+          this.topicService.update(topic).then(() => {
+             const _topic = this.topics.find(item=>item.id === topic.id);
+             Object.assign(_topic, topic);
+          });
+        }
+        else {
+          this.topicService.create(topic).then((topic) => {
+              this.topics.push(topic);
+              this.quiz.topics.push(topic.id);
+              this.quizService.update(this.quiz).then(()=>{
+                  this.chRef.detectChanges();
+              });
+          });
+        }
       }
     });
   }
