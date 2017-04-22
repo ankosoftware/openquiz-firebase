@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {FirebaseService} from "./firbase.service";
-import {Quiz} from "../../model/Quiz";
+import {Quiz} from "../../model/quiz.model";
 import {AngularFire} from "angularfire2";
 
 @Injectable()
