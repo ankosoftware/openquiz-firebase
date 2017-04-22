@@ -1,15 +1,21 @@
-import { RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { UIRouterModule } from 'ui-router-ng2';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 
-export const router = RouterModule.forChild([
+
+export const states = [
   {
-    path: 'admin',
-    component: AdminComponent,
-    children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'quizzes', component: QuizzesComponent }
-    ]
+    name: 'admin',
+    url: '/admin',
+    component: AdminComponent
+  },
+  {
+    name: 'admin.quizzes',
+    url: '/quizzes',
+    component: QuizzesComponent
   }
-]);
+];
+
+export const routing: ModuleWithProviders = UIRouterModule.forChild({ states });
