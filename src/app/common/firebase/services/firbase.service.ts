@@ -68,7 +68,7 @@ export abstract class FirebaseService<T extends Base> {
     return item && item.id && this.object(item.id).update(item.toJSON()).catch(err => this.onCatch(err));
   }
 
-  remove(key): Thenable<void> {
+  remove(key:string): Thenable<void> {
     return key && this.items().remove(key).catch(err => this.onCatch(err));
   }
 }

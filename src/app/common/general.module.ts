@@ -5,20 +5,28 @@ import {routing} from './general.router';
 import {LoginComponent} from "./login/login.component";
 import {PaginationComponent} from "./components/pagination/pagination.component";
 import {BrowserModule} from "@angular/platform-browser";
+import {ConfirmComponent} from "./components/confirm/confirm.component";
+import {BootstrapModalModule} from "ng2-bootstrap-modal";
 
 @NgModule({
   imports: [
     BrowserModule,
     FirebaseModule,
-    routing
+    routing,
+    BootstrapModalModule
   ],
   declarations: [
     NotFoundComponent,
     LoginComponent,
-    PaginationComponent
+    PaginationComponent,
+    ConfirmComponent
   ],
   exports: [
-    PaginationComponent
+    PaginationComponent,
+    ConfirmComponent
+  ],
+  entryComponents: [
+    ConfirmComponent
   ]
 })
 export class GeneralModule {}
