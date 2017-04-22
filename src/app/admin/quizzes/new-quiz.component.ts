@@ -15,6 +15,7 @@ export class NewQuizComponent extends DialogComponent<Quiz, Quiz> implements IQu
   isPublic: boolean;
   name: string;
   description: string;
+  topics: string[] = [];
   questions: string[] = [];
   constructor(dialogService: DialogService, protected quizService: QuizService) {
     super(dialogService)
@@ -34,7 +35,8 @@ export class NewQuizComponent extends DialogComponent<Quiz, Quiz> implements IQu
         passScore: this.passScore,
         isPublic: this.isPublic,
         description: this.description,
-        questions: this.questions
+        questions: this.questions,
+        topics: this.topics
       });
       this.close();
     }

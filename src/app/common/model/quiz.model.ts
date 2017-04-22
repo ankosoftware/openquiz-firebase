@@ -4,17 +4,19 @@ export interface IQuiz extends IBase {
   name: string;
   description: string;
   questions: string[];
+  topics: string[];
   totalTimeLimit: number;
   isPublic: boolean;
   passScore: number;
 }
 
 export class Quiz extends Base implements IQuiz{
+  name: string;
+  description: string;
   totalTimeLimit: number;
   passScore: number;
   isPublic: boolean;
-  name: string;
-  description: string;
+  topics: string[];
   questions: string[];
 
   constructor(json?: IQuiz) {

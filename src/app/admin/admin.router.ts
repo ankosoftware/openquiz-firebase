@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { QuizComponent } from './quizzes/quiz.component';
 import { QuizService } from "../common/firebase/services/quiz.service";
+import {Transition} from "ui-router-core/lib";
 
 export const states = [
   {
@@ -28,7 +29,15 @@ export const states = [
   {
     name: 'admin.quiz',
     url: '/quizzes/:quizId',
-    component: QuizComponent
+    component: QuizComponent,
+    resolve: [{
+      token: 'quiz',
+      deps: [QuizService, Transition],
+      resolveFn: (quizService: QuizService, transition: Transition) => {
+        return quizService.get(transition.params().quizId).first().toPromise();
+      }
+    }
+    ]
   }
 ];
 
