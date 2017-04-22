@@ -1,12 +1,8 @@
 import {Base} from "./base.model";
 
-export class QuestionAnswer extends Base {
+export interface QuestionAnswer {
   answer: string;
   isCorrect: boolean;
-
-  constructor(json?: any) {
-    super(json);
-  }
 }
 
 export enum QuestionType {

@@ -49,10 +49,10 @@ export class QuestionComponent {
       type: question.type,
       description: question.description,
       answers: this.answers.map((answer) => {
-        return new QuestionAnswer({
+        return {
           answer: answer.answer,
-          isCorrect: answer.isCorrect
-        });
+          isCorrect: !!answer.isCorrect
+        };
       })
     });
 
