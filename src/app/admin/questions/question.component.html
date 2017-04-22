@@ -18,17 +18,45 @@
           [(ngModel)]="question.question"
         >
       </div>
-      <div class="form-group">
-        <label for="answers">
-          Answers
-        </label>
-        <select id="answers" name="answers" [(ngModel)]="question.answers" class="form-control">
-          <option value="Apple fritter">
-            Multiple Choice
-          </option>
-        </select>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="answers-type">
+              Answers
+            </label>
+            <select id="answers-type" data-dropdownjs="true" name="answers-type" [(ngModel)]="question.answersType" class="form-control">
+              <option value="Apple fritter">
+                Multiple Choice
+              </option>
+            </select>
+          </div>
+        </div>
       </div>
 
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+
+        </div>
+      </div>
+      <div class="row" *ngFor="let answer in answers; let index = index;">
+        <div class="col-md-4">
+          A.
+          <input
+            type="text"
+            id=""
+            name=""
+            [(ngModel)]="answer.answer"
+          >
+        </div>
+        <div class="col-md-1">
+
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="addAnswer()">
+        Add Answer
+      </button>
     </form>
   </div>
 </div>

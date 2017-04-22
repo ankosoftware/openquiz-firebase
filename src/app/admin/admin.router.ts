@@ -1,7 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { UIRouterModule } from 'ui-router-ng2';
 import { AdminComponent } from './admin.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { QuizComponent } from './quizzes/quiz.component';
 import { TopicComponent } from './topics/topic.component';
