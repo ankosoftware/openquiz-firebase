@@ -5,7 +5,7 @@
 </div>
 <div class="container-fluid">
   <div class="well well-lg">
-    <form name="form" #form="ngForm" (ngSubmit)="form.form.valid" novalidate>
+    <form name="form" #form="ngForm" (ngSubmit)="onSubmit(form, $event);" novalidate>
       <div class="form-group label-floating is-empty">
         <label class="control-label" for="question">
           Question
@@ -15,7 +15,7 @@
           type="text"
           id="question"
           name="question"
-          [(ngModel)]="question.question"
+          [(ngModel)]="question.name"
         >
       </div>
       <div class="form-group">
@@ -29,7 +29,7 @@
             </a>
           </div>
         </div>
-        <textarea id="question-content" name="question-content" [(ngModel)]="question.content"
+        <textarea id="question-content" name="question-content" [(ngModel)]="question.description"
                   style="width: 100%;" rows="10"></textarea>
       </div>
       <div class="row">
@@ -38,9 +38,12 @@
             <label for="answers-type">
               Answers
             </label>
-            <select id="answers-type" data-dropdownjs="true" name="answers-type" [(ngModel)]="question.answersType"
+            <select id="answers-type" data-dropdownjs="true" name="answers-type" [(ngModel)]="question.type"
                     class="form-control">
-              <option value="multiple-choice">
+              <option value="1">
+                Single
+              </option>
+              <option value="2">
                 Multiple Choice
               </option>
             </select>
@@ -55,26 +58,37 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="answer-{{index}}"
-                  name="answer-{{index}}"
+                  id="answer-{{index}}-{{answer._timestamp}}"
+                  name="answer-{{index}}-{{answer._timestamp}}"
                   placeholder="Answer"
                   [(ngModel)]="answer.answer"
                 >
               </div>
               <div class="pull-left checkbox">
                 <label>
-                  <input type="checkbox" name="isPublic" [(ngModel)]="answer.isCorrect">
+                  <input
+                    type="checkbox"
+                    id="is-correct-{{index}}-{{answer._timestamp}}"
+                    name="is-correct-{{index}}-{{answer._timestamp}}"
+                    [(ngModel)]="answer.isCorrect"
+                    (change)="onControlsChanged(index)"
+                  >
                   <span class="checkbox-material">
                     <span class="check"></span>
                   </span>
                 </label>
+              </div>
+              <div class="pull-left">
+                <button type="button" class="btn btn-danger btn-sm" (click)="removeAnswer(index)">
+                  x
+                </button>
               </div>
             </li>
           </ul>
         </div>
       </div>
       <div class="form-group">
-        <button type="button" class="btn btn-default" (click)="addAnswer()">
+        <button type="button" class="btn btn-default btn-sm" (click)="addAnswer()">
           Add Answer
         </button>
       </div>
