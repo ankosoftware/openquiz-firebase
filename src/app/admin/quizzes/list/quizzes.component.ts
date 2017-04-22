@@ -19,12 +19,14 @@ export class QuizzesComponent implements OnInit{
   }
 
   editQuiz(quiz=new Quiz()) {
+
     this.dialogService.addDialog(NewQuizComponent, quiz).subscribe((quiz:Quiz)=> {
+      debugger;
       if(quiz) {
         if (quiz.id) {
-          this.quizService.update(quiz).then(() => {
-              const _quiz = this.quizzes.find(item=>item.id === quiz.id);
-              Object.assign(_quiz, quiz);
+          this.quizService.update(quiz).then((res) => {
+            const _quiz = this.quizzes.find(item=>item.id === quiz.id);
+            Object.assign(_quiz, quiz);
           });
         }
         else {

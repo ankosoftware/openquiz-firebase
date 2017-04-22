@@ -31,6 +31,6 @@ export class NewTopicComponent extends DialogComponent<Topic, Topic> implements 
         randomizeQuestions: this.randomizeQuestions
       });
     }
-    close();
+    this.close();
   }
 }

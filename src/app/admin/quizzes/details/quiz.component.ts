@@ -34,8 +34,9 @@ export class QuizComponent implements OnInit{
           this.topicService.create(topic).then((topic) => {
               this.topics.push(topic);
               this.quiz.topics.push(topic.id);
-              this.quizService.update(this.quiz).then(()=>{
-                  this.chRef.detectChanges();
+              this.quizService.update(this.quiz).then((quiz) => {
+                Object.assign(this.quiz, quiz);
+                this.chRef.detectChanges();
               });
           });
         }
