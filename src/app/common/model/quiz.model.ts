@@ -15,7 +15,7 @@ export class Quiz extends Base implements IQuiz{
   description: string;
   totalTimeLimit: number;
   passScore: number;
-  isPublic: boolean = false;
+  isPublic: boolean;
   topics: string[];
   questions: string[];
 
@@ -23,5 +23,6 @@ export class Quiz extends Base implements IQuiz{
     super(json);
     this.topics = this.topics || [];
     this.questions = this.questions || [];
+    this.isPublic =  this.isPublic || false;
   }
 }

@@ -8,6 +8,7 @@ import { QuestionComponent } from './questions/question.component';
 import { QuizService } from "../common/firebase/services/quiz.service";
 import {Transition} from "ui-router-core/lib";
 import {AuthService} from "../common/firebase/services/auth.service";
+import {TopicService} from "../common/firebase/services/topic.service";
 
 export function resolveQuizzes(quizService: QuizService) {
   return quizService.list().first().toPromise();
@@ -16,8 +17,13 @@ export function resolveQuizzes(quizService: QuizService) {
 export function resolveQuiz(quizService: QuizService, transition: Transition)  {
   return quizService.get(transition.params().quizId).first().toPromise();
 }
+
 export function resolveUser(authService: AuthService) {
   return authService.getUser();
+}
+
+export function resolveTopic(topicService: TopicService, transition: Transition) {
+  return topicService.get(transition.params().topicId).first().toPromise();
 }
 
 export const states = [
@@ -54,7 +60,12 @@ export const states = [
   {
     name: 'admin.topic',
     url: '/quizzes/:quizId/topic/:topicId',
-    component: TopicComponent
+    component: TopicComponent,
+    resolve: [{
+        token: 'topic',
+        deps: [TopicService, Transition],
+        resolveFn: resolveTopic
+    }]
   },
   {
     name: 'admin.question',

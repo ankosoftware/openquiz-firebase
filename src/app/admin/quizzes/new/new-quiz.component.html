@@ -7,7 +7,7 @@
             ×
           </button>
           <h4 class="modal-title">
-            New Quiz
+            {{isNew() ? 'New Quiz' : 'Edit Quiz'}}
           </h4>
         </div>
         <div class="modal-body">
@@ -16,6 +16,7 @@
               Quiz Name
             </label>
             <input
+              required
               class="form-control"
               type="text"
               id="quiz-name"
@@ -37,7 +38,7 @@
             </label>
             <input
               class="form-control"
-              type="text"
+              type="number"
               id="time-limit"
               name="time-limit"
               [(ngModel)]="totalTimeLimit"
@@ -49,7 +50,7 @@
             </label>
             <input
               class="form-control"
-              type="text"
+              type="number"
               id="pass-score"
               name="pass-score"
               [(ngModel)]="passScore"
@@ -70,7 +71,7 @@
             Cancel
           </button>
           <button type="submit" class="btn btn-primary">
-            Create Quiz
+            {{isNew() ? 'Create Quiz' : 'Save Quiz'}}
           </button>
         </div>
       </form>

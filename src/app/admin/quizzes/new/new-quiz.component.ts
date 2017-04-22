@@ -12,17 +12,17 @@ export class NewQuizComponent extends DialogComponent<Quiz, Quiz> implements IQu
   id: string;
   totalTimeLimit: number;
   passScore: number;
-  isPublic: boolean;
   name: string;
   description: string;
   topics: string[] = [];
   questions: string[] = [];
+  isPublic: boolean;
   constructor(dialogService: DialogService, protected quizService: QuizService) {
     super(dialogService)
   }
 
   isNew() {
-    return !!this.id;
+    return !this.id;
   }
 
   onSubmit(form:NgForm, event) {

@@ -25,7 +25,14 @@
     Add Topic
   </button>
   <div class="well well-lg" *ngFor="let topic of topics">
-    <h3>{{topic.name}}</h3>
-    <p>{{topic.description}}</p>
+    <div class="col-md-10">
+      <a uiSref="admin.topic" [uiParams]="{ quizId: quiz.id, topicId: topic.id }"><h3>{{topic.name}}</h3></a>
+      <p>{{topic.description}}</p>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-default btn-sm" (click)="editTopic(topic)">
+        Edit
+      </button>
+    </div>
   </div>
 </div>

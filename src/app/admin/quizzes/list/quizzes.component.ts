@@ -21,7 +21,6 @@ export class QuizzesComponent implements OnInit{
   editQuiz(quiz=new Quiz()) {
 
     this.dialogService.addDialog(NewQuizComponent, quiz).subscribe((quiz:Quiz)=> {
-      debugger;
       if(quiz) {
         if (quiz.id) {
           this.quizService.update(quiz).then((res) => {
