@@ -6,7 +6,9 @@ import {AuthService} from "../firebase/services/auth.service";
 })
 export class LoginComponent {
   constructor(private authService: AuthService) {
-
+    this.authService.getAuth().subscribe((auth)=>{
+        console.log(auth);
+    });
   }
   loginGoogle() {
     this.authService.loginGoogle();

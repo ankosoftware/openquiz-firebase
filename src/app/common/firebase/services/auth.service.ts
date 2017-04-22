@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {AngularFire, AuthMethods, AuthProviders} from "angularfire2";
+import "rxjs/add/operator/map";
 
 @Injectable()
 
 export class AuthService {
   constructor(private af: AngularFire) {
-
   }
   loginGoogle() {
     this.af.auth.login({
@@ -24,5 +24,10 @@ export class AuthService {
   }
   logout() {
     this.af.auth.login();
+  }
+  getUser() {
+    return this.af.auth.map((data)=>{
+      return data && data.auth;
+    });
   }
 }
