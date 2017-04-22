@@ -26,8 +26,8 @@ export class QuizzesComponent implements OnInit{
         });
       }
       else {
-        this.quizService.create(quiz).then(()=>{
-          this.quizzes.push(quiz);
+        this.quizService.create(quiz).then((res)=>{
+          this.quizzes.push(res);
         });
       }
     });

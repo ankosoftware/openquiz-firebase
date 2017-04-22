@@ -41,8 +41,10 @@ export abstract class FirebaseService<T extends Base> {
     return this.db.list(this.url);
   }
 
-  create(item: T): Thenable<T> {
-    return item && this.items().push(item.toDB()).catch(err => this.onCatch(err)).then(this.toModel);
+  create(item: T): Promise<T> {
+    return item && this.items()
+        .push(item.toDB()).catch(err => this.onCatch(err))
+        .then(ref => this.get(ref.key).first().toPromise());
   }
 
   list(query?: any): Observable<T[]> {
