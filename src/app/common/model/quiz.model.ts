@@ -1,10 +1,13 @@
-export class Quiz {
+import {Base} from "./base.model";
 
-  name: String;
-  description: String;
-  questions: Array<String>;
+export class Quiz extends Base {
 
-  constructor(json: any) {
-    Object.assign(this, json);
+  name?: string;
+  description?: string;
+  questions?: string[];
+
+  constructor(json?: any) {
+    super(json);
   }
+
 }
