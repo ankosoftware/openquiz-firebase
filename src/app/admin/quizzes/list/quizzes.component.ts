@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { NewQuizComponent } from './new-quiz.component';
-import {Quiz} from "../../common/model/quiz.model";
-import {QuizService} from "../../common/firebase/services/quiz.service";
+import { NewQuizComponent } from '../new/new-quiz.component';
+import {Quiz} from "../../../common/model/quiz.model";
+import {QuizService} from "../../../common/firebase/services/quiz.service";
 
 @Component({
   inputs: ['quizzes'],

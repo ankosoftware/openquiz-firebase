@@ -7,11 +7,11 @@ import { routing } from './admin.router';
 
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { QuizzesComponent } from './quizzes/quizzes.component';
-import { QuizComponent } from './quizzes/quiz.component';
-import { NewQuizComponent } from './quizzes/new-quiz.component';
-import { NewTopicComponent } from './quizzes/new-topic.component';
-import { TopicComponent } from './topics/topic.component';
+import { QuizzesComponent } from './quizzes/list/quizzes.component';
+import { QuizComponent } from './quizzes/details/quiz.component';
+import { NewQuizComponent } from './quizzes/new/new-quiz.component';
+import { NewTopicComponent } from './topics/new/new-topic.component';
+import { TopicComponent } from './topics/details/topic.component';
 import { QuestionComponent } from './questions/question.component';
 
 @NgModule({

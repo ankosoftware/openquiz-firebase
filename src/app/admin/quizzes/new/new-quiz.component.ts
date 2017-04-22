@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
-import {IQuiz, Quiz} from "../../common/model/quiz.model";
-import {QuizService} from "../../common/firebase/services/quiz.service";
+import {IQuiz, Quiz} from "../../../common/model/quiz.model";
+import {QuizService} from "../../../common/firebase/services/quiz.service";
 import {NgForm} from "@angular/forms";
 
 @Component({

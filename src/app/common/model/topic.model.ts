@@ -6,7 +6,7 @@ export interface ITopic extends IBase {
   questionTimeLimit?: number;
   numberOfQuestions?: number;
   pointsPerQuestion?: number;
-  questions: string[];
+  randomizeQuestions?: boolean;
 }
 
 export class Topic extends Base implements ITopic {
@@ -15,7 +15,7 @@ export class Topic extends Base implements ITopic {
   questionTimeLimit: number;
   numberOfQuestions: number;
   pointsPerQuestion: number;
-  questions: string[];
+  randomizeQuestions: boolean;
   constructor(json?: any) {
     super(json);
   }

@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { UIRouterModule } from 'ui-router-ng2';
 import { AdminComponent } from './admin.component';
-import { QuizzesComponent } from './quizzes/quizzes.component';
-import { QuizComponent } from './quizzes/quiz.component';
-import { TopicComponent } from './topics/topic.component';
+import { QuizzesComponent } from './quizzes/list/quizzes.component';
+import { QuizComponent } from './quizzes/details/quiz.component';
+import { TopicComponent } from './topics/details/topic.component';
 import { QuestionComponent } from './questions/question.component';
 import { QuizService } from "../common/firebase/services/quiz.service";
 import {Transition} from "ui-router-core/lib";
