@@ -1,0 +1,62 @@
+<div class="jumbotron">
+  <a uiSref="">
+    Back to Topic
+  </a>
+</div>
+<div class="container-fluid">
+  <div class="well well-lg">
+    <form name="form" #form="ngForm" (ngSubmit)="form.form.valid" novalidate>
+      <div class="form-group label-floating is-empty">
+        <label class="control-label" for="question">
+          Question
+        </label>
+        <input
+          class="form-control"
+          type="text"
+          id="question"
+          name="question"
+          [(ngModel)]="question.question"
+        >
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="answers-type">
+              Answers
+            </label>
+            <select id="answers-type" data-dropdownjs="true" name="answers-type" [(ngModel)]="question.answersType" class="form-control">
+              <option value="Apple fritter">
+                Multiple Choice
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+
+        </div>
+      </div>
+      <div class="row" *ngFor="let answer in answers; let index = index;">
+        <div class="col-md-4">
+          A.
+          <input
+            type="text"
+            id=""
+            name=""
+            [(ngModel)]="answer.answer"
+          >
+        </div>
+        <div class="col-md-1">
+
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="addAnswer()">
+        Add Answer
+      </button>
+    </form>
+  </div>
+</div>
