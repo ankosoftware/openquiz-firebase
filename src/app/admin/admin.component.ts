@@ -10,7 +10,7 @@ export class AdminComponent {
 
   }
   getUser() {
-    return this.authService.getUser().subscribe((user)=>{
+    return this.authService.getUser().then((user)=>{
       this.user = user;
       console.log(user);
     })

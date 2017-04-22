@@ -28,6 +28,6 @@ export class AuthService {
   getUser() {
     return this.af.auth.map((data)=>{
       return data && data.auth;
-    });
+    }).first().toPromise();
   }
 }

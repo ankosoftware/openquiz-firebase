@@ -1,12 +1,21 @@
 import { UIRouterModule } from 'ui-router-ng2';
 import { ModuleWithProviders } from '@angular/core';
-import {LandingComponent} from "./landing/landing.component";
+import { LandingComponent } from "./landing/landing.component";
+import { AuthService } from "./common/firebase/services/auth.service";
 
 export const states = [
   {
     name: 'home',
     url: '/',
-    component: LandingComponent
+    component: LandingComponent,
+    resolve: [{
+      token: 'user',
+      deps: [AuthService],
+      resolveFn: (authService: AuthService) => {
+        return authService.getUser()
+      }
+    }]
+
   }
 ];
 
