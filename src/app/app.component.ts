@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import {AuthService} from "./common/firebase/services/auth.service";
 
 declare const $: any;
@@ -8,8 +8,10 @@ declare const $: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  ngOnInit() {
-    $.material.init();
+export class AppComponent implements AfterViewInit {
+  ngAfterViewInit() {
+    setTimeout(() => {
+      $.material.init();
+    });
   }
 }

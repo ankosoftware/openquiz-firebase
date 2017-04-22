@@ -2,4 +2,42 @@
   &&-default {
     background-color: #f7f7f7;
   }
+
+  &&-github {
+    background-color: @btn-github;
+    border: 1px solid @btn-github;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: @btn-github !important;
+    }
+  }
+
+  &&-google {
+    background-color: @btn-google;
+    border: 1px solid rgba(76, 87, 102, .1);
+  }
+
+  &&-facebook {
+    background-color: @btn-facebook;
+    border: 1px solid @btn-facebook;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: @btn-facebook !important;
+    }
+  }
+
+  &&-github,
+  &&-facebook {
+    color: white;
+  }
+
+  &&-github,
+  &&-google,
+  &&-facebook {
+    letter-spacing: -0.015em;
+  }
 }
