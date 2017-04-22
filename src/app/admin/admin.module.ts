@@ -8,10 +8,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { QuizComponent } from './quizzes/quiz.component';
 import { NewQuizComponent } from './quizzes/new-quiz.component';
+import { NewTopicComponent } from './quizzes/new-topic.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     routing
   ],
   declarations: [
@@ -19,10 +21,12 @@ import { NewQuizComponent } from './quizzes/new-quiz.component';
     DashboardComponent,
     QuizzesComponent,
     QuizComponent,
-    NewQuizComponent
+    NewQuizComponent,
+    NewTopicComponent
   ],
   entryComponents: [
-    NewQuizComponent
+    NewQuizComponent,
+    NewTopicComponent
   ]
 })
 export class AdminModule {}
