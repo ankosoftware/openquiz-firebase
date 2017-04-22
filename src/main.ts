@@ -1,3 +1,6 @@
+import "bootstrap-material-design/dist/js/material.js";
+import "bootstrap-material-design/dist/js/ripples.js";
+
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
