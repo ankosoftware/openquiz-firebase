@@ -1,16 +1,22 @@
 import {Base} from "./base.model";
 
-export class Question extends Base {
+export interface QuestionAnswer {
+  answer: string;
+  isCorrect: boolean;
+}
 
+export enum QuestionType {
+  single = 1,
+  multipleChoice,
+}
+
+export class Question extends Base {
   name: string;
-  // TODO: enum
-  type: string;
+  type: QuestionType;
   description: string;
-  answers: string[];
-  correctAnswer: string;
+  answers: QuestionAnswer[];
 
   constructor(json?: any) {
     super(json);
   }
-
 }
