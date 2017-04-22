@@ -21,5 +21,7 @@ export class Quiz extends Base implements IQuiz{
 
   constructor(json?: IQuiz) {
     super(json);
+    this.topics = this.topics || [];
+    this.questions = this.questions || [];
   }
 }
