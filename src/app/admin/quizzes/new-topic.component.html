@@ -3,24 +3,24 @@
     <div class="modal-content">
       <form name="form" #form="ngForm" (ngSubmit)="form.form.valid" novalidate>
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="close()">
             ×
           </button>
           <h4 class="modal-title">
-            New Quiz
+            New Topic
           </h4>
         </div>
         <div class="modal-body">
           <div class="form-group label-floating is-empty">
-            <label class="control-label" for="quiz-name">
-              Quiz Name
+            <label class="control-label" for="topic-name">
+              Topic Name
             </label>
             <input
               class="form-control"
               type="text"
-              id="quiz-name"
-              name="quiz-name"
-              [(ngModel)]="model.quizName"
+              id="topic-name"
+              name="topic-name"
+              [(ngModel)]="model.topicName"
             >
           </div>
           <div class="form-group">
@@ -31,69 +31,57 @@
                       [(ngModel)]="model.description"></textarea>
           </div>
           <div class="form-group label-floating is-empty">
-            <label class="control-label" for="begin-date">
-              Begin Date
+            <label class="control-label" for="question-time-limit">
+              Question Time Limit (minutes)
             </label>
             <input
               class="form-control"
               type="text"
-              id="begin-date"
-              name="begin-date"
-              [(ngModel)]="model.beginDate"
+              id="question-time-limit"
+              name="question-time-limit"
+              [(ngModel)]="model.questionTimeLimit"
             >
           </div>
           <div class="form-group label-floating is-empty">
-            <label class="control-label" for="end-date">
-              End Date
+            <label class="control-label" for="number-of-questions">
+              Number of Questions
             </label>
             <input
               class="form-control"
               type="text"
-              id="end-date"
-              name="end-date"
-              [(ngModel)]="model.endDate"
+              id="number-of-questions"
+              name="number-of-questions"
+              [(ngModel)]="model.numberOfQuestions"
             >
           </div>
           <div class="form-group label-floating is-empty">
-            <label class="control-label" for="time-limit">
-              Time Limit (minutes)
+            <label class="control-label" for="point-per-question">
+              Points per Question
             </label>
             <input
               class="form-control"
               type="text"
-              id="time-limit"
-              name="time-limit"
-              [(ngModel)]="model.timeLimit"
-            >
-          </div>
-          <div class="form-group label-floating is-empty">
-            <label class="control-label" for="pass-score">
-              Pass Score
-            </label>
-            <input
-              class="form-control"
-              type="text"
-              id="pass-score"
-              name="pass-score"
-              [(ngModel)]="model.passScore"
+              id="point-per-question"
+              name="point-per-question"
+              [(ngModel)]="model.pointPerQuestion"
             >
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="isPublic" [(ngModel)]="model.isPublic">
+              <input type="checkbox" name="randomize-questions" [(ngModel)]="model.randomizeQuestions">
               <span class="checkbox-material">
                 <span class="check"></span>
               </span>
-              Public Quiz
+              Randomize Questions
             </label>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" (click)="close()">
-            Cancel
+            Close
           </button>
           <button type="button" class="btn btn-primary">
-            Create Quiz
+            Create Topic
           </button>
         </div>
       </form>
