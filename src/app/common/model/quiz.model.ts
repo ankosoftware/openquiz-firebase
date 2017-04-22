@@ -16,8 +16,8 @@ export class Quiz extends Base implements IQuiz{
   totalTimeLimit: number;
   passScore: number;
   isPublic: boolean = false;
-  topics: string[] = [];
-  questions: string[] = [];
+  topics: string[];
+  questions: string[];
 
   constructor(json?: IQuiz) {
     super(json);
