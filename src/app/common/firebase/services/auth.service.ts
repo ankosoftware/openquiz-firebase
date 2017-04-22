@@ -24,7 +24,7 @@ export class AuthService {
       method: AuthMethods.Redirect});
   }
   logout() {
-    this.af.auth.login();
+    return this.af.auth.logout();
   }
   getUser():Promise<User> {
     return this.af.auth.first().toPromise().then((data) => data && data.auth);

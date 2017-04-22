@@ -7,12 +7,20 @@ import {User} from "../common/model/user.model";
   inputs: ['user'],
   templateUrl: './admin.component.html'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
   @Input() user: User;
+
   constructor(private authService: AuthService, protected uiRouter: UIRouter) {}
 
+  ngOnInit(): void {
+    if(!this.user) {
+      this.uiRouter.stateService.go('login');
+    }
+  }
+
   logout() {
-    this.authService.logout();
-    this.uiRouter.stateService.go('login');
+    this.authService.logout().then(() => {
+      this.uiRouter.stateService.go('login');
+    });
   }
 }
