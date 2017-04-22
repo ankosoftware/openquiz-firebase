@@ -5,6 +5,7 @@ import {Quiz} from "../../../common/model/quiz.model";
 import {Topic} from "../../../common/model/topic.model";
 import {QuizService} from "../../../common/firebase/services/quiz.service";
 import {TopicService} from "../../../common/firebase/services/topic.service";
+import {ConfirmComponent} from "../../../common/components/confirm/confirm.component";
 
 @Component({
   inputs: ['quiz'],
@@ -39,6 +40,18 @@ export class QuizComponent implements OnInit{
                 this.chRef.detectChanges();
               });
           });
+        }
+      }
+    });
+  }
+  deleteTopic(topic: Topic) {
+    this.dialogService.addDialog(ConfirmComponent, {title:'Delete Topic', message: `Are you sure you want to delete topic "${topic.name}"?`})
+      .subscribe((result) => {
+      if(result) {
+        const index = this.topics.findIndex(item=>item.id === topic.id);
+        if(index>-1) {
+          this.topics.splice(index, 1);
+          this.chRef.detectChanges();
         }
       }
     });
