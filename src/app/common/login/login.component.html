@@ -1,8 +1,28 @@
-<div>
-  <h1>
-    Login
-  </h1>
-  <button (click)="loginGoogle()">Google</button>
-  <button (click)="loginGithub()">Github</button>
-  <button (click)="loginFacebook()">Facebook</button>
+<div class="container-fluid auth">
+  <div class="row auth-row">
+    <div class="col-lg-4 auth-column">
+      <div class="auth-container">
+        <h3 class="text-center auth-header">
+          Welcome to Open Quiz
+        </h3>
+        <p class="text-center auth-description">
+          Please, sign in to Open Quiz with
+        </p>
+
+        <button type="button" (click)="loginGoogle()" class="btn btn-block btn-google">
+          Google
+        </button>
+
+        <button type="button" (click)="loginGithub()" class="btn btn-block btn-github">
+          GitHub
+        </button>
+
+        <button type="button" (click)="loginFacebook()" class="btn btn-block btn-facebook">
+          Facebook
+        </button>
+      </div>
+    </div>
+    <div class="col-lg-8 auth-hero">
+    </div>
+  </div>
 </div>
