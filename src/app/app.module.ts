@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GeneralModule } from './common/general.module';
 
 import { AppComponent } from './app.component';
@@ -15,7 +14,6 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    BrowserAnimationsModule,
     GeneralModule
   ],
   providers: [],
