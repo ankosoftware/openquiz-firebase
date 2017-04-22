@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { GeneralModule } from './common/general.module';
 import { AdminModule } from './admin/admin.module';
 
@@ -19,6 +20,7 @@ import { routing } from './app.router';
     BrowserModule,
     FormsModule,
     HttpModule,
+    BootstrapModalModule,
     GeneralModule,
     AdminModule,
     routing
