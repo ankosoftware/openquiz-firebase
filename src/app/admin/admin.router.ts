@@ -20,12 +20,7 @@ export const states = [
         token: 'quizzes',
         deps: [QuizService],
         resolveFn: (quizService: QuizService) => {
-          const list = quizService.list();
-
-          return list.toPromise().then((a)=>{
-            console.log(a);
-            return a;
-          });
+          return quizService.list().first().toPromise();
         }
       }
     ]
