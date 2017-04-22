@@ -7,7 +7,7 @@ export abstract class Base implements IBase {
 
   constructor(json: any = {}) {
     Object.assign(this, json);
-    this.id = json && json.$key;
+    this.id = json && (json.$key || json.id);
   }
 
   toDB(): any {

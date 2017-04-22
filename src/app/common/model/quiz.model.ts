@@ -16,10 +16,12 @@ export class Quiz extends Base implements IQuiz{
   totalTimeLimit: number;
   passScore: number;
   isPublic: boolean = false;
-  topics: string[] = [];
-  questions: string[] = [];
+  topics: string[];
+  questions: string[];
 
   constructor(json?: IQuiz) {
     super(json);
+    this.topics = this.topics || [];
+    this.questions = this.questions || [];
   }
 }

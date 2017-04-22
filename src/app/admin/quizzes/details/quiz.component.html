@@ -24,7 +24,8 @@
   <button type="button" class="btn btn-raised btn-primary" (click)="editTopic()">
     Add Topic
   </button>
-  <div class="well well-lg">
-    Look, I'm in a large well!!
+  <div class="well well-lg" *ngFor="let topic of topics">
+    <h3>{{topic.name}}</h3>
+    <p>{{topic.description}}</p>
   </div>
 </div>
