@@ -50,8 +50,8 @@
       <div class="row">
         <div class="col-md-4">
           <ul>
-            <li *ngFor="let answer of answers; let index = index;">
-              <div class="form-group">
+            <li class="clearfix" *ngFor="let answer of answers; let index = index;">
+              <div class="pull-left form-group">
                 <input
                   type="text"
                   class="form-control"
@@ -61,12 +61,25 @@
                   [(ngModel)]="answer.answer"
                 >
               </div>
+              <div class="pull-left checkbox">
+                <label>
+                  <input type="checkbox" name="isPublic" [(ngModel)]="answer.isCorrect">
+                  <span class="checkbox-material">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-      <button type="button" class="btn btn-primary" (click)="addAnswer()">
-        Add Answer
+      <div class="form-group">
+        <button type="button" class="btn btn-default" (click)="addAnswer()">
+          Add Answer
+        </button>
+      </div>
+      <button type="submit" class="btn btn-raised btn-primary">
+        Save Question
       </button>
     </form>
   </div>
