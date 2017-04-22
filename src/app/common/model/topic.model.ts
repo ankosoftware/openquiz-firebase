@@ -1,16 +1,22 @@
-import {Base} from "./base.model";
+import {Base, IBase} from "./base.model";
 
-export class Topic extends Base {
-
+export interface ITopic extends IBase {
   name: string;
-  // TODO: enum
-  type: string;
-  description: string;
-  answers: string[];
-  correctAnswer: string;
+  description?: string;
+  questionTimeLimit?: number;
+  numberOfQuestions?: number;
+  pointsPerQuestion?: number;
+  questions: string[];
+}
 
+export class Topic extends Base implements ITopic {
+  name: string;
+  description: string;
+  questionTimeLimit: number;
+  numberOfQuestions: number;
+  pointsPerQuestion: number;
+  questions: string[];
   constructor(json?: any) {
     super(json);
   }
-
 }

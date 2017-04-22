@@ -3,7 +3,7 @@
     <h3 class="pull-left">
       Quizzes
     </h3>
-    <button type="button" class="btn btn-default pull-right" (click)="newQuiz()">
+    <button type="button" class="btn btn-default pull-right" (click)="editQuiz()">
       New Quiz
     </button>
   </div>
@@ -27,7 +27,8 @@
 </div>
 <div class="container-fluid">
   <div class="well well-lg" *ngFor="let quiz of quizzes">
-    <h3>{{quiz.name}}</h3>
+    <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }"><h3>{{quiz.name}}</h3></a>
     <p>{{quiz.description}}</p>
+    <p (click)="editQuiz(quiz)">Edit</p>
   </div>
 </div>

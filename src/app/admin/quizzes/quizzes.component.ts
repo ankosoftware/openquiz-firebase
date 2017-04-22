@@ -18,8 +18,8 @@ export class QuizzesComponent implements OnInit{
 
   }
 
-  newQuiz() {
-    this.dialogService.addDialog(NewQuizComponent, {}).subscribe((quiz:Quiz)=>{
+  editQuiz(quiz=new Quiz()) {
+    this.dialogService.addDialog(NewQuizComponent, quiz).subscribe((quiz:Quiz)=>{
       if(quiz.id) {
         this.quizService.update(quiz).then(()=>{
 
