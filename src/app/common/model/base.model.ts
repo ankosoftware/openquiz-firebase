@@ -10,7 +10,7 @@ export abstract class Base implements IBase {
     this.id = json && (json.$key || json.id);
   }
 
-  toDB(): any {
+  toJSON(): any {
     let obj = {};
     Object.assign(obj, this);
     for (let key in obj) {

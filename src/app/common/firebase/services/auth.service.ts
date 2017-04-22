@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {AngularFire, AuthMethods, AuthProviders} from "angularfire2";
 import "rxjs/add/operator/map";
+import {User} from "../../model/user.model";
 
 @Injectable()
 
@@ -25,7 +26,7 @@ export class AuthService {
   logout() {
     this.af.auth.login();
   }
-  getUser() {
+  getUser():Promise<User> {
     return this.af.auth.first().toPromise().then((data) => data && data.auth);
   }
 }

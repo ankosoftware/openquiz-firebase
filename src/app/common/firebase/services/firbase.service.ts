@@ -43,7 +43,7 @@ export abstract class FirebaseService<T extends Base> {
 
   create(item: T): Promise<T> {
     return item && this.items()
-        .push(item.toDB()).catch(err => this.onCatch(err))
+        .push(item.toJSON()).catch(err => this.onCatch(err))
         .then(ref => this.get(ref.key).first().toPromise());
   }
 
@@ -53,7 +53,7 @@ export abstract class FirebaseService<T extends Base> {
 
   getList(keys: string[]): Promise<T[]> {
     if (!keys && !keys.map) {
-      return undefined;
+      return;
     }
     let promises = keys.map(key => this.get(key).first().toPromise());
     return Promise.all(promises);
@@ -64,11 +64,10 @@ export abstract class FirebaseService<T extends Base> {
   }
 
   update(item: T): Thenable<void> {
-    return item && item.id && this.object(item.id).update(item.toDB()).catch(err => this.onCatch(err));
+    return item && item.id && this.object(item.id).update(item.toJSON()).catch(err => this.onCatch(err));
   }
 
   remove(key): Thenable<void> {
     return key && this.items().remove(key).catch(err => this.onCatch(err));
   }
-
 }
