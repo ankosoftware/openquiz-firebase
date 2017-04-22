@@ -5,7 +5,8 @@ import {AuthService} from "../common/firebase/services/auth.service";
   templateUrl: './admin.component.html'
 })
 export class AdminComponent {
-  user: any;
+  user: any = {};
+
   constructor(private authService: AuthService) {
     this.authService.getUser().then((user)=> {
       this.user = user;
