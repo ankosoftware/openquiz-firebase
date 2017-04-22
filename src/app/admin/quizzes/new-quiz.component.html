@@ -11,7 +11,7 @@
           </h4>
         </div>
         <div class="modal-body">
-          <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating" [class.is-empty]="!name">
             <label class="control-label" for="quiz-name">
               Quiz Name
             </label>
@@ -31,7 +31,7 @@
                       [(ngModel)]="description"></textarea>
           </div>
 
-          <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating" [class.is-empty]="!totalTimeLimit">
             <label class="control-label" for="time-limit">
               Time Limit (minutes)
             </label>
@@ -43,7 +43,7 @@
               [(ngModel)]="totalTimeLimit"
             >
           </div>
-          <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating" [class.is-empty]="!passScore">
             <label class="control-label" for="pass-score">
               Pass Score
             </label>

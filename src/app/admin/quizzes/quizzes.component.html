@@ -27,8 +27,18 @@
 </div>
 <div class="container-fluid">
   <div class="well well-lg" *ngFor="let quiz of quizzes">
-    <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }"><h3>{{quiz.name}}</h3></a>
-    <p>{{quiz.description}}</p>
-    <p (click)="editQuiz(quiz)">Edit</p>
+    <div class="row">
+      <div class="col-md-10">
+        <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }">
+          <h3>{{quiz.name}}</h3>
+        </a>
+        <p>{{quiz.description}}</p>
+      </div>
+      <div class="col-md-2 text-right">
+        <button type="button" class="btn btn-default" (click)="editQuiz(quiz)">
+          Edit
+        </button>
+      </div>
+    </div>
   </div>
 </div>
