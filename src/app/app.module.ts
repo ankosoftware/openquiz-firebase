@@ -5,16 +5,21 @@ import { HttpModule } from '@angular/http';
 import { GeneralModule } from './common/general.module';
 
 import { AppComponent } from './app.component';
+import { LandingComponent } from './landing/landing.component';
+
+import { routing } from './app.router';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    GeneralModule
+    GeneralModule,
+    routing
   ],
   providers: [],
   bootstrap: [
