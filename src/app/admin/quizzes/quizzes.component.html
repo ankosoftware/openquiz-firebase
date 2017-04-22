@@ -27,7 +27,13 @@
 </div>
 <div class="container-fluid">
   <div class="well well-lg" *ngFor="let quiz of quizzes">
-    <h3>{{quiz.name}}</h3>
-    <p>{{quiz.description}}</p>
+    <h3>
+      <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }">
+        {{quiz.name}}
+      </a>
+    </h3>
+    <p>
+      {{quiz.description}}
+    </p>
   </div>
 </div>
