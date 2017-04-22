@@ -26,7 +26,8 @@
   </ul>
 </div>
 <div class="container-fluid">
-  <div class="well well-lg">
-    Look, I'm in a large well!
+  <div class="well well-lg" *ngFor="let quiz of quizzes">
+    <h3>{{quiz.name}}</h3>
+    <p>{{quiz.description}}</p>
   </div>
 </div>

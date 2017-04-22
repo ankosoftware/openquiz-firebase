@@ -8,10 +8,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { QuizComponent } from './quizzes/quiz.component';
 import { NewQuizComponent } from './quizzes/new-quiz.component';
+import {GeneralModule} from "../common/general.module";
 
 @NgModule({
   imports: [
     CommonModule,
+    GeneralModule,
     routing
   ],
   declarations: [

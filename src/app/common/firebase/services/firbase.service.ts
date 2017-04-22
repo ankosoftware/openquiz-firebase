@@ -32,7 +32,7 @@ export abstract class FirebaseService<T extends Base> {
 
   list(query?: any): Observable<T[]> {
     let res = new Observable();
-    this.items().subscribe();//.subscribe(this.arrayToModel);
+    //this.items().subscribe();//.subscribe(this.arrayToModel);
     return this.items().map(json => this.arrayToModel(json));
   }
 
