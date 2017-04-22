@@ -5,7 +5,7 @@ import {QuizResult} from "../../model/quizresult.model";
 import {UIRouter} from "ui-router-ng2";
 
 @Injectable()
-export class QuizService extends FirebaseService<QuizResult> {
+export class QuizResultService extends FirebaseService<QuizResult> {
 
   constructor(af: AngularFire, uiRouter: UIRouter) {
     super(af, uiRouter, 'quizresult');

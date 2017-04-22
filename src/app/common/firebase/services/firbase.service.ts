@@ -49,6 +49,14 @@ export abstract class FirebaseService<T extends Base> {
     return this.items().map(json => this.arrayToModel(json)).catch((err, caught) => this.errorHandler(err, caught));
   }
 
+  getList(keys: string[]): Promise<T[]> {
+    if (!keys && !keys.map) {
+      return undefined;
+    }
+    let promises = keys.map(key => this.get(key).first().toPromise());
+    return Promise.all(promises);
+  }
+
   get(key: string): Observable<T> {
     return key && this.object(key).map(json => this.toModel(json)).catch((err, caught) => this.errorHandler(err, caught));
   }
