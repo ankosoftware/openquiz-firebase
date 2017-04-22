@@ -11,9 +11,7 @@ export const states = [
     resolve: [{
       token: 'user',
       deps: [AuthService],
-      resolveFn: (authService: AuthService) => {
-        return authService.getUser()
-      }
+      resolveFn: authService => authService.getUser()
     }]
 
   }

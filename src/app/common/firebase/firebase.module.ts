@@ -1,7 +1,10 @@
 import {NgModule} from "@angular/core";
 import {AngularFireModule, AuthMethods, AuthProviders} from "angularfire2";
 import {AuthService} from "./services/auth.service";
+import {QuestionService} from "./services/question.service";
 import {QuizService} from "./services/quiz.service";
+import {QuizResultService} from "./services/quizresult.service";
+import {TopicService} from "./services/topic.service";
 
 const myFirebaseConfig = {
   apiKey: "AIzaSyCpB9v4KCqezTbJv1GGYSy-NVh5m8PeTbU",
@@ -23,7 +26,10 @@ const myFirebaseAuthConfig = {
   ],
   providers: [
     AuthService,
-    QuizService
+    QuestionService,
+    QuizService,
+    QuizResultService,
+    TopicService
   ]
 })
 export class FirebaseModule {
