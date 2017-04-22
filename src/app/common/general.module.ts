@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { FirebaseModule } from './firebase/firebase.module';
+import { NotFoundComponent } from "./errors/404/not-found.component";
+import {routing} from './general.router';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    FirebaseModule
+    FirebaseModule,
+    routing
+  ],
+  declarations: [
+    NotFoundComponent
   ]
 })
 export class GeneralModule {}

@@ -2,23 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
 import { GeneralModule } from './common/general.module';
 import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
+import { LandingComponent } from './landing/landing.component';
+
+import { routing } from './app.router';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([]),
     GeneralModule,
     AdminModule,
+    routing
   ],
   providers: [],
   bootstrap: [

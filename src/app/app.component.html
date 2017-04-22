@@ -1,7 +1,6 @@
-<h1>
-  {{title}}
-  <button (click)="loginGoogle()">Google</button>
-  <button (click)="loginGithub()">Github</button>
-</h1>
-<router-outlet>
-</router-outlet>
+<main>
+  <h1>{{title}}</h1>
+  <ui-view></ui-view>
+  <!--<button (click)="loginGoogle()">Google</button>
+  <button (click)="loginGithub()">Github</button>-->
+</main>
