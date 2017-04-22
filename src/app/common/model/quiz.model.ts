@@ -1,17 +1,23 @@
-import {Base} from "./base.model";
+import {Base, IBase} from "./base.model";
 
-export class Quiz extends Base {
-
+export interface IQuiz extends IBase {
   name: string;
   description: string;
   questions: string[];
-  timeAllowed: {
-    perQuestion: number,
-    total: number
-  };
+  totalTimeLimit: number;
+  isPublic: boolean;
+  passScore: number;
+}
 
-  constructor(json?: any) {
+export class Quiz extends Base implements IQuiz{
+  totalTimeLimit: number;
+  passScore: number;
+  isPublic: boolean;
+  name: string;
+  description: string;
+  questions: string[];
+
+  constructor(json?: IQuiz) {
     super(json);
   }
-
 }
