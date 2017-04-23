@@ -17,6 +17,9 @@ export abstract class Base implements IBase {
       if (!obj[key]) {
         delete obj[key];
       }
+      if(key.startsWith('_')) {
+        delete obj[key];
+      }
     }
     return obj;
   }

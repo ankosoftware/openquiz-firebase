@@ -14,23 +14,42 @@
           class="form-control"
           type="text"
           id="question"
-          name="question"
-          [(ngModel)]="question.name"
+          name="question-name"
+          [(ngModel)]="question.title"
         >
       </div>
+      <div class="form-group label-floating is-empty">
+        <label class="control-label" for="question-type">
+          Question Type
+        </label>
+        <select id="question-type" name="question-type" class="form-control" [(ngModel)]="question.questionType">
+          <option value="text">Text</option>
+          <option value="image">Image</option>
+          <option value="md">Markdown</option>
+        </select>
+      </div>
       <div class="form-group">
-        <div class="clearfix">
-          <label for="question-content">
+       <label>
             Question Content
-          </label>
-          <div class="pull-right">
-            <a href="https://daringfireball.net/projects/markdown/" target="_blank">
-              Markdown Format Help
-            </a>
-          </div>
+        </label>
+        <div *ngIf="question.questionType === 'text'">
+          <textarea name="question-content" [(ngModel)]="question.content" style="width: 100%;" rows="10"></textarea>
         </div>
-        <textarea id="question-content" name="question-content" [(ngModel)]="question.description"
-                  style="width: 100%;" rows="10"></textarea>
+        <div *ngIf="question.questionType === 'image'">
+          <h1>Image</h1>
+        </div>
+        <div *ngIf="question.questionType === 'md'">
+          <div class="clearfix">
+            <div class="pull-right">
+              <a href="https://daringfireball.net/projects/markdown/" target="_blank">
+                Markdown Format Help
+              </a>
+            </div>
+          </div>
+          <textarea id="question-content" name="question-content" [(ngModel)]="question.content"
+                    style="width: 100%;" rows="10"></textarea>
+        </div>
+
       </div>
       <div class="row">
         <div class="col-md-3">
@@ -38,57 +57,62 @@
             <label for="answers-type">
               Answers
             </label>
-            <select id="answers-type" data-dropdownjs="true" name="answers-type" [(ngModel)]="question.type"
-                    class="form-control">
-              <option value="1">
-                Single
-              </option>
-              <option value="2">
-                Multiple Choice
-              </option>
+            <select id="answers-type" name="answers-type" (change)="answerTypeChanged()" [(ngModel)]="question.answerType" class="form-control">
+              <option value="">Select answers type...</option>
+              <option value="single_select">Single Choice</option>
+              <option value="multi_select">Multiple Choice</option>
+              <option value="text">Text</option>
             </select>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <ul>
-            <li class="clearfix" *ngFor="let answer of answers; let index = index;">
-              <div class="pull-left form-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="answer-{{index}}-{{answer._timestamp}}"
-                  name="answer-{{index}}-{{answer._timestamp}}"
-                  placeholder="Answer"
-                  [(ngModel)]="answer.answer"
-                >
-              </div>
-              <div class="pull-left checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    id="is-correct-{{index}}-{{answer._timestamp}}"
-                    name="is-correct-{{index}}-{{answer._timestamp}}"
-                    [(ngModel)]="answer.isCorrect"
-                    (change)="onControlsChanged(index)"
-                  >
-                  <span class="checkbox-material">
-                    <span class="check"></span>
-                  </span>
-                </label>
-              </div>
-              <div class="pull-left">
-                <button type="button" class="btn btn-danger btn-sm" (click)="removeAnswer(index)">
-                  x
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div>
+      <div *ngIf="question.answerType === 'single_select'">
+        <ul>
+          <li *ngFor="let answer of question.answers let index = index">
+              <label>
+                <input  type="radio"  name="radioAnswers" [value]="answer.id" [(ngModel)]="selectedAnswer" (change)="answerSelectionChanged(answer)" >
+                <input type="text" required name="ansewer-title{{index}}" [(ngModel)]="answer.title" placeholder="Enter answer text" class="form-control">
+              </label>
+            <div class="pull-left">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="removeAnswer(answer)">
+                    x
+                  </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="question.answerType === 'multi_select'">
+        <ul>
+          <li *ngFor="let answer of question.answers let index = index">
+            <label>
+              <input  type="checkbox" name="ansewer-check{{index}}" [(ngModel)]="answer._correct" (change)="answerSelectionChanged(answer)" >
+              <input type="text" required name="ansewer-title{{index}}" [(ngModel)]="answer.title" placeholder="Enter answer text" class="form-control">
+            </label>
+            <div class="pull-left">
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeAnswer(answer)">
+                x
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="question.answerType === 'text'">
+        <ul>
+          <li *ngFor="let answer of question.correctAnswer let index = index">
+            <label>
+              <input type="text" required name="ansewer-title{{index}}" [(ngModel)]="answer.title" placeholder="Enter answer text" class="form-control">
+              <input type="text" required name="ansewer-value{{index}}" [(ngModel)]="answer.value" placeholder="Enter right answer" class="form-control">
+            </label>
+            <div class="pull-left">
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeAnswer(answer)">
+                x
+              </button>
+            </div>
+          </li>
+        </ul>
       </div>
       <div class="form-group">
-        <button type="button" class="btn btn-default btn-sm" (click)="addAnswer()">
+        <button type="button" *ngIf="question.answerType" class="btn btn-default btn-sm" (click)="addAnswer()">
           Add Answer
         </button>
       </div>

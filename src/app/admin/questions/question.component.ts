@@ -1,43 +1,85 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {Transition} from "ui-router-core/lib";
 import { QuestionService } from '../../common/firebase/services/question.service';
-import { Question, QuestionType, QuestionAnswer } from '../../common/model/question.model';
-import { MaterialComponent } from "../../common/components/material/material.component";
+import {Question, QUESTION_TYPE, ANSWER_TYPE, QuestionAnswer} from '../../common/model/question.model';
+import {MaterialComponent} from "../../common/components/material/material.component";
 
 @Component({
+  inputs:['question'],
   templateUrl: './question.component.html'
 })
-export class QuestionComponent extends MaterialComponent {
-  question: Question | any = {
-    type: QuestionType.single
-  };
+export class QuestionComponent extends MaterialComponent implements OnInit{
 
-  answers = [];
+  @Input() question: Question;
 
-  constructor(
-    protected questionService: QuestionService
-  ) {
+  selectedAnswer: string;
+
+  constructor(protected questionService: QuestionService, private transition: Transition) {
     super();
   }
 
-  onControlsChanged(index: number) {
-    if (this.question.type === QuestionType.single) {
-      this.answers.forEach((answer, indexInThePool: number) => {
-        if (indexInThePool !== index) {
-          answer.isCorrect = false;
-        }
-      });
+  ngOnInit(): void {
+    if(!this.question) {
+      this.question = new Question({topicId: this.transition.params().topicId});
+    }
+    else {
+      switch(this.question.answerType) {
+        case 'single_select':
+          this.selectedAnswer = this.question.correctAnswer[0] && this.question.correctAnswer[0].id;
+          break;
+        case 'multi_select':
+          this.question.answers.forEach((answer)=>{
+            answer._correct = !!this.question.correctAnswer.find((corAnswer)=> corAnswer.id == answer.id)
+          });
+          break;
+      }
+      if(this.question.answerType=='single_select') {
+
+      }
+    }
+  }
+
+  answerSelectionChanged(answer) {
+    switch(this.question.answerType) {
+      case 'single_select': {
+        this.question.correctAnswer = [answer];
+      }
+      break;
+      case 'multi_select': {
+        this.question.correctAnswer = this.question.answers.filter((answer)=>answer._correct);
+      }
     }
   }
 
   addAnswer() {
-    this.answers.push({
-      _timestamp: new Date().getTime()
-    });
+    switch(this.question.answerType) {
+      case 'single_select':
+      case 'multi_select': {
+        this.question.answers.push(new QuestionAnswer());
+      }
+      break;
+      case 'text': {
+        this.question.correctAnswer.push(new QuestionAnswer());
+      }
+    }
   }
 
-  removeAnswer(index) {
-    this.answers.splice(index, 1);
+  removeAnswer(answer) {
+    const answIndx = this.question.answers.findIndex(item=>answer.id == item.id);
+    const corAnswIndx = this.question.correctAnswer.findIndex(item=>answer.id == item.id);
+    if(answIndx > -1) {
+      this.question.answers.splice(answIndx, 1);
+    }
+    if(corAnswIndx > -1) {
+      this.question.correctAnswer.splice(answIndx, 1);
+    }
+  }
+
+  answerTypeChanged() {
+    this.question.answers = [];
+    this.question.correctAnswer = [];
+    this.selectedAnswer = null;
   }
 
   onSubmit(form: NgForm, event) {
@@ -45,22 +87,8 @@ export class QuestionComponent extends MaterialComponent {
     if (!form.valid) {
       return;
     }
-
-    const { question } = this;
-    const payloadData = new Question({
-      name: question.name,
-      type: question.type,
-      description: question.description,
-      answers: this.answers.map((answer) => {
-        return {
-          answer: answer.answer,
-          isCorrect: !!answer.isCorrect
-        };
-      })
-    });
-
-    this.questionService.create(payloadData).then((response) => {
-      console.log(response);
+    this.questionService.create(this.question).then(() => {
+      window.history.back();
     });
   }
 }
