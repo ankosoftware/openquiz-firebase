@@ -62,7 +62,12 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
     this.result = new QuizResult();
     this.result.start = this.started;
     this.result.quiz = this.quiz.id;
-    this.result.user = this.user.email;
+    this.result.user = {
+      uid: this.user.uid,
+      email: this.user.email,
+      displayName: this.user.displayName,
+      photoURL: this.user.photoURL
+    };
     this.quizResultService.create(this.result).then((res) => this.result = res);
     if(this.quiz.totalTimeLimit) {
       this.timeLeft = this.quiz.totalTimeLimit * 60 * 1000 - (Date.now() - this.started.getTime());
