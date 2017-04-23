@@ -9,7 +9,7 @@
   </div>
   <ul class="nav nav-tabs">
     <li>
-      <a uiSref="admin.quiz_result" [uiParams]="{ quizId: quiz.id }">
+      <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }">
         Questions
       </a>
     </li>
@@ -23,6 +23,17 @@
 <div class="container-fluid">
   <div class="margin-vertical-10"></div>
   <div class="well well-lg clearfix" *ngFor="let result of results">
-      {{result}}
+      <div class="row">
+        <div class="col-sm-1">
+          <img [image]="result.user.photoURL || ''" style="width: 55px; height:55px; border-radius: 50%;" />
+        </div>
+        <div class="col-sm-7">
+          <a><h4>{{result.user.displayName || result.user}}</h4></a>
+          <small>{{result.user.email || result.user}}</small>
+        </div>
+        <div class="col-sm-3">
+          {{result.end | date : 'medium'}}
+        </div>
+      </div>
   </div>
 </div>
