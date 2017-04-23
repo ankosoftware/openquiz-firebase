@@ -10,11 +10,12 @@
 </div>
 <div class="container-fluid">
   <div class="margin-vertical-10">
-    <a class="btn btn-raised btn-primary btn-sm" uiSref="admin.question" [uiParams]="{ quizId: quizId,  topicId: topic.id}">
+    <a class="btn btn-raised btn-primary btn-sm" *ngIf="topic && topic.isOwner"  uiSref="admin.question" [uiParams]="{ quizId: quizId,  topicId: topic.id}">
       Add Question
     </a>
   </div>
   <div class="well well-lg" *ngFor="let question of questions">
+
     <a uiSref="admin.question_edit" [uiParams]="{quizId: quizId,  topicId: topic.id, questionId: question.id}"><h3>{{question.title}}</h3></a>
   </div>
 </div>
