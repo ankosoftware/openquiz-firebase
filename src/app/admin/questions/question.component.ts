@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {Transition} from "ui-router-core/lib";
-import { QuestionService } from '../../common/firebase/services/question.service';
+import {QuestionService} from '../../common/firebase/services/question.service';
 import {Question, QUESTION_TYPE, ANSWER_TYPE, QuestionAnswer} from '../../common/model/question.model';
 import {MaterialComponent} from "../../common/components/material/material.component";
 import {UIRouter} from "ui-router-ng2";
+import {StorageService} from "../../common/firebase/services/storage.service";
+import uuid from "uuid";
 
 @Component({
   inputs:['question'],
@@ -15,8 +17,9 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
   @Input() question: Question;
 
   selectedAnswer: string;
+  uploadProggress: number = 0;
 
-  constructor(protected questionService: QuestionService, private transition: Transition, private uiRouter: UIRouter) {
+  constructor(protected questionService: QuestionService, private transition: Transition, private uiRouter: UIRouter, private storageService: StorageService) {
     super();
   }
 
@@ -34,7 +37,7 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
             answer._correct = !!this.question.correctAnswer.find((corAnswer)=> corAnswer.id == answer.id)
           });
           break;
-      }
+    }
     }
   }
 
@@ -48,6 +51,10 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
         this.question.correctAnswer = this.question.answers.filter((answer)=>answer._correct);
       }
     }
+  }
+
+  questionTypeChanged() {
+    this.question.content = '';
   }
 
   addAnswer() {
@@ -78,6 +85,16 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
     this.question.answers = [];
     this.question.correctAnswer = [];
     this.selectedAnswer = null;
+  }
+
+  imageChanged(file) {
+    this.storageService.create(uuid.v4(), file).subscribe((event)=>{
+      if(event.url) {
+        this.question.content = event.url;
+        this.uploadProggress = event.progress;
+      }
+
+    });
   }
 
   onSubmit(form: NgForm, event) {
