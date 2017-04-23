@@ -35,9 +35,11 @@ export function resolveUser(authService: AuthService) {
   return authService.getUser();
 }
 export function resolveSuperuser(authService: AuthService, superuserService: SuperuserService) {
-  return authService.getUser().then(user => superuserService.get(user.uid).first().toPromise().then(superuser => {
-    return !superuser ? resolveUser(authService).then(user => new Superuser(user)) : superuser;
-  }));
+  return authService.getUser()
+    .then(user => user && user.uid && superuserService.get(user.uid).first().toPromise()
+      .then(superuser => {
+        return !superuser ? resolveUser(authService).then(user => new Superuser(user)) : superuser;
+      }));
 }
 
 export function resolveTopic(topicService: TopicService, transition: Transition) {
