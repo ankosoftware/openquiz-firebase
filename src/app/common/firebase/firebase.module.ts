@@ -6,6 +6,7 @@ import {QuizService} from "./services/quiz.service";
 import {QuizResultService} from "./services/quizresult.service";
 import {TopicService} from "./services/topic.service";
 import {SuperuserService} from "./services/superuser.service";
+import {StorageService} from "./services/storage.service";
 
 const myFirebaseConfig = {
   apiKey: "AIzaSyCpB9v4KCqezTbJv1GGYSy-NVh5m8PeTbU",
@@ -31,7 +32,8 @@ const myFirebaseAuthConfig = {
     QuizService,
     QuizResultService,
     TopicService,
-    SuperuserService
+    SuperuserService,
+    StorageService
   ]
 })
 export class FirebaseModule {

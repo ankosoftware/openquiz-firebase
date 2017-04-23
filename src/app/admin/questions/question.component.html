@@ -22,7 +22,7 @@
         <label class="control-label" for="question-type">
           Question Type
         </label>
-        <select id="question-type" name="question-type" class="form-control" [(ngModel)]="question.questionType">
+        <select id="question-type" (change)="questionTypeChanged()" name="question-type" class="form-control" [(ngModel)]="question.questionType">
           <option value="text">Text</option>
           <option value="image">Image</option>
           <option value="md">Markdown</option>
@@ -36,7 +36,7 @@
           <textarea name="question-content" [(ngModel)]="question.content" style="width: 100%;" rows="10"></textarea>
         </div>
         <div *ngIf="question.questionType === 'image'">
-          <h1>Image</h1>
+          <app-drag-and-drop [img]="question.content || ''" (fileChanged)="imageChanged($event)"></app-drag-and-drop>
         </div>
         <div *ngIf="question.questionType === 'md'">
           <div class="clearfix">
