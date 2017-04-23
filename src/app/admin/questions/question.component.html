@@ -9,7 +9,7 @@
 <div class="container-fluid">
   <div class="well well-lg">
     <form name="form" #form="ngForm" (ngSubmit)="onSubmit(form, $event);" novalidate>
-      <div class="form-group label-floating" [class.is-empty]="!question.title">
+      <div class="form-group label-floating" >
         <label class="control-label" for="question">
           Question
         </label>
@@ -206,7 +206,7 @@
           Add Answer
         </button>
       </div>
-      <button type="submit" class="btn btn-raised btn-primary">
+      <button type="submit" [disabled]="!isOwner()" class="btn btn-raised btn-primary">
         Save Question
       </button>
     </form>

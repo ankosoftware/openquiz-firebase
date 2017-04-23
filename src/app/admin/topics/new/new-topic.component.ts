@@ -15,6 +15,7 @@ export class NewTopicComponent extends DialogComponent<Topic, Topic> implements 
   numberOfQuestions: number;
   pointsPerQuestion: number;
   randomizeQuestions: boolean;
+  isOwner: boolean;
   constructor(dialogService: DialogService) {
     super(dialogService);
   }
