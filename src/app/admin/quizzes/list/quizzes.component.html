@@ -30,26 +30,37 @@
   </ul>
 </div>
 <div class="container-fluid">
-  <div class="well well-lg" *ngFor="let quiz of quizzes.data">
-    <div class="row">
-      <div class="col-md-10">
-        <h4 class="margin-vertical-0">
-          <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }">
-            {{quiz.name}}
-          </a>
-        </h4>
-        <p>{{quiz.description}}</p>
-      </div>
-      <div class="col-md-2 text-right">
-        <button type="button" [disabled]="!quiz.isOwner" class="btn btn-default btn-sm" (click)="editQuiz(quiz)">
-          Edit
-        </button>
-        <a uiSref="player" [uiParams]="{quizId: quiz.id}" class="btn btn-default btn-sm" >
-          Preview
+  <div class="well well-lg clearfix" *ngFor="let quiz of quizzes.data">
+    <div class="pull-left">
+      <h4 class="margin-vertical-0">
+        <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }">
+          {{quiz.name}}
         </a>
-        <button type="button" [disabled]="!quiz.isOwner" class="btn btn-default btn-sm" (click)="deleteQuiz(quiz)">
-          Delete
+      </h4>
+      <p>{{quiz.description}}</p>
+    </div>
+    <div class="pull-right">
+      <div class="btn-group">
+        <button type="button" data-target="#" class="btn btn-raised btn-fab btn-fab-mini dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">&#xE5D4;</i>
         </button>
+        <ul class="dropdown-menu">
+          <li *ngIf="!quiz.isOwner">
+            <a role="button" (click)="editQuiz(quiz)">
+              Edit
+            </a>
+          </li>
+          <li>
+            <a role="button" uiSref="player" [uiParams]="{quizId: quiz.id}">
+              Preview
+            </a>
+          </li>
+          <li *ngIf="!quiz.isOwner" >
+            <a role="button" class="text-danger" (click)="deleteQuiz(quiz)">
+              Delete
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
