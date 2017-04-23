@@ -9,6 +9,7 @@ import { QuizService } from "../common/firebase/services/quiz.service";
 import {Transition} from "ui-router-core/lib";
 import {AuthService} from "../common/firebase/services/auth.service";
 import {TopicService} from "../common/firebase/services/topic.service";
+import {SuperuserService} from "../common/firebase/services/superuser.service";
 import {Query} from "angularfire2/interfaces";
 import {QuestionService} from "../common/firebase/services/question.service";
 
@@ -25,6 +26,9 @@ export function resolveQuiz(quizService: QuizService, transition: Transition)  {
 
 export function resolveUser(authService: AuthService) {
   return authService.getUser();
+}
+export function resolveSuperuser(authService: AuthService, superuserService: SuperuserService) {
+  return authService.getUser().then(user => superuserService.get(user.uid).first().toPromise());
 }
 
 export function resolveTopic(topicService: TopicService, transition: Transition) {
@@ -45,6 +49,10 @@ export const states = [
       token: 'user',
       deps: [AuthService],
       resolveFn: resolveUser
+    }, {
+      token: 'superuser',
+      deps: [AuthService, SuperuserService],
+      resolveFn: resolveSuperuser
     }]
   },
   {
