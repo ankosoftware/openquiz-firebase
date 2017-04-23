@@ -1,4 +1,12 @@
 <ul class="pager">
-  <li class="previous" [ngClass]="{disabled:skip===0}"><a (click)="previous()">← Previous</a></li>
-  <li class="next"><a class="withripple" (click)="next()">Next →</a></li>
+  <li class="previous" *ngIf="skip !== 0">
+    <button type="button" class="btn btn-primary btn-raised" (click)="previous()">
+      Previous
+    </button>
+  </li>
+  <li class="next" *ngIf="hasNextPage">
+    <button type="button" class="btn btn-primary btn-raised" (click)="next()">
+      Next
+    </button>
+  </li>
 </ul>
