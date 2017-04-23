@@ -1,0 +1,18 @@
+<h1>OpenQuiz admin section</h1>
+<div *ngIf="!user">
+  <p>
+    You are not authorized.
+    <a uiSref="login">Go to login page</a>
+  </p>
+</div>
+<div *ngIf="!!user">
+  <div *ngIf="!!superuser">
+    You are already admin.
+    <a uiSref="admin">Go to admin page</a>
+  </div>
+  <div *ngIf="!superuser">
+    <p>
+      <button (click)="makeMeAdmin()">Make me admin, please.</button>
+    </p>
+  </div>
+</div>
