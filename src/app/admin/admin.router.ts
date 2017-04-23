@@ -10,9 +10,11 @@ import {Transition} from "ui-router-core/lib";
 import {AuthService} from "../common/firebase/services/auth.service";
 import {TopicService} from "../common/firebase/services/topic.service";
 import {SuperuserService} from "../common/firebase/services/superuser.service";
+import {QuizResultService} from "../common/firebase/services/quizresult.service";
 import {Query} from "angularfire2/interfaces";
 import {QuestionService} from "../common/firebase/services/question.service";
 import {ResultsComponent} from "./results/results.component";
+import {ResultDetailsComponent} from "./results/details/resultdetails.component";
 
 export function resolveQuizzes(quizService: QuizService, transition: Transition) {
   const query:Query = {
@@ -23,6 +25,9 @@ export function resolveQuizzes(quizService: QuizService, transition: Transition)
 
 export function resolveQuiz(quizService: QuizService, transition: Transition)  {
   return quizService.get(transition.params().quizId).first().toPromise();
+}
+export function resolveQuizResult(quizresultService: QuizResultService, transition: Transition)  {
+  return quizresultService.get(transition.params().quizresultId).first().toPromise();
 }
 
 export function resolveUser(authService: AuthService) {
@@ -84,6 +89,20 @@ export const states = [
       token: 'quiz',
       deps: [QuizService, Transition],
       resolveFn: resolveQuiz
+    }]
+  },
+  {
+    name: 'admin.quiz_result_details',
+    url: '/quizzes/:quizId/results/:quizresultId',
+    component: ResultDetailsComponent,
+    resolve: [{
+      token: 'quiz',
+      deps: [QuizService, Transition],
+      resolveFn: resolveQuiz
+    }, {
+      token: 'quizresult',
+      deps: [QuizResultService, Transition],
+      resolveFn: resolveQuizResult
     }]
   },
   {
