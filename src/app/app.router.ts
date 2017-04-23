@@ -3,8 +3,19 @@ import { ModuleWithProviders } from '@angular/core';
 import { LandingComponent } from "./landing/landing.component";
 import { AuthService } from "./common/firebase/services/auth.service";
 import { MakeMeAdminComponent } from "./makemeadmin.component";
+import {QuizService} from "./common/firebase/services/quiz.service";
+import {Query} from "angularfire2/interfaces";
 
 export function resolveUser(authService:AuthService) { return authService.getUser() }
+export function resolveQuizzes(quizService: QuizService) {
+  const query:Query = {
+    orderByChild: 'isPublic',
+    equalTo:true
+  };
+  return quizService.list(query, 0, 10).then((page)=>{
+    return page.data;
+  });
+}
 
 export const states = [
   {
@@ -12,10 +23,10 @@ export const states = [
     url: '/',
     component: LandingComponent,
     resolve: [{
-      token: 'user',
-      deps: [AuthService],
-      resolveFn: resolveUser
-    }]
+        token: 'quizzes',
+        deps: [QuizService],
+        resolveFn: resolveQuizzes
+      }]
   },
   {
     name: 'makemeadmin',
