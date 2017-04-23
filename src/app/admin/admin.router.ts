@@ -37,6 +37,7 @@ export const states = [
     name: 'admin',
     url: '/admin',
     component: AdminComponent,
+    redirectTo: 'admin.quizzes',
     resolve: [{
       token: 'user',
       deps: [AuthService],
