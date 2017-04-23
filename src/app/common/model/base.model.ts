@@ -4,6 +4,7 @@ export interface IBase {
 export abstract class Base implements IBase {
 
   id?: string;
+  owner?: string;
 
   constructor(json: any = {}) {
     Object.assign(this, json);

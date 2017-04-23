@@ -27,6 +27,12 @@ export class AuthService {
     return this.af.auth.logout();
   }
   getUser():Promise<User> {
-    return this.af.auth.first().toPromise().then((data) => data && data.auth);
+    return this.af.auth.first().toPromise().then((data) => {
+      let user = data && data.auth && new User(data.auth);
+      if(user) {
+        user.owner = user.uid;
+      }
+      return user;
+    });
   }
 }

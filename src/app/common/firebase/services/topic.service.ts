@@ -8,7 +8,7 @@ import {Topic} from "../../model/topic.model";
 export class TopicService extends FirebaseService<Topic> {
 
   constructor(af: AngularFire, uiRouter: UIRouter) {
-    super(af, uiRouter, 'quiz');
+    super(af, uiRouter, 'topic');
   }
 
   toModel(json: any): Topic {
