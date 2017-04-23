@@ -1,14 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Transition} from "ui-router-core/lib";
 import {UIRouter} from "ui-router-ng2";
 
 @Component({
+  inputs: ['hasNextPage'],
   selector:'pagination',
   templateUrl: './pagination.component.html'
 })
 export class PaginationComponent implements OnInit {
   skip: number;
   limit: number;
+  @Input() hasNextPage: boolean;
+
   constructor (protected transition: Transition, protected uiRouter: UIRouter) {
 
   }
