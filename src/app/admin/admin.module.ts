@@ -16,6 +16,7 @@ import { QuestionComponent } from './questions/question.component';
 import { MarkdownModule } from 'angular2-markdown';
 import {ResultsComponent} from "./results/results.component";
 import {ResultDetailsComponent} from "./results/details/resultdetails.component";
+import {AnalisysServices} from "./quizzes/analisys.service";
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import {ResultDetailsComponent} from "./results/details/resultdetails.component"
     TopicComponent,
     QuestionComponent,
     ResultsComponent,
-    ResultDetailsComponent
+    ResultDetailsComponent,
+    AnalisysServices
   ],
   entryComponents: [
     NewQuizComponent,
