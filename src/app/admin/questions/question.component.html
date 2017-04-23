@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <div class="container-fluid">
-    <a uiSref="" class="back-link">
+    <a uiSref="admin.quiz" [uiParams]="{ quizId: quizId }" class="back-link">
       <i class="material-icons">&#xE5CB;</i>
       Back to Topic
     </a>
@@ -9,14 +9,14 @@
 <div class="container-fluid">
   <div class="well well-lg">
     <form name="form" #form="ngForm" (ngSubmit)="onSubmit(form, $event);" novalidate>
-      <div class="form-group label-floating" >
-        <label class="control-label" for="question">
+      <div class="form-group label-floating" [class.is-empty]="!question.title">
+        <label class="control-label" for="question-name">
           Question
         </label>
         <input
           class="form-control"
           type="text"
-          id="question"
+          id="question-name"
           name="question-name"
           [(ngModel)]="question.title"
         >
@@ -44,13 +44,6 @@
           </app-drag-and-drop>
         </div>
         <div *ngIf="question.questionType === 'md'">
-          <div class="clearfix">
-            <div class="pull-right">
-              <a href="https://daringfireball.net/projects/markdown/" target="_blank">
-                Markdown Format Help
-              </a>
-            </div>
-          </div>
           <div class="row">
             <div class="col-sm-6">
               <textarea [(ngModel)]="question.content" name="question-content" style="width:100%;" rows="10"></textarea>
@@ -178,7 +171,7 @@
               >
             </div>
 
-            <div class="form-group label-floating margin-left-16" [class.is-empty]="!answer.title">
+            <div class="form-group label-floating margin-left-16" [class.is-empty]="!answer.value">
               <label class="control-label" for="ansewer-title{{index}}">
                 Right Answer
               </label>
