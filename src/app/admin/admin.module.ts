@@ -14,6 +14,7 @@ import { NewTopicComponent } from './topics/new/new-topic.component';
 import { TopicComponent } from './topics/details/topic.component';
 import { QuestionComponent } from './questions/question.component';
 import { MarkdownModule } from 'angular2-markdown';
+import {ResultsComponent} from "./results/results.component";
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { MarkdownModule } from 'angular2-markdown';
     NewQuizComponent,
     NewTopicComponent,
     TopicComponent,
-    QuestionComponent
+    QuestionComponent,
+    ResultsComponent
   ],
   entryComponents: [
     NewQuizComponent,

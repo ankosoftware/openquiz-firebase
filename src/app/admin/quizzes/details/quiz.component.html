@@ -8,13 +8,13 @@
     </p>
   </div>
   <ul class="nav nav-tabs">
-    <li>
-      <a href="javascript:void(0)">
+    <li class="active">
+      <a class="active">
         Questions
       </a>
     </li>
     <li>
-      <a href="javascript:void(0)">
+      <a uiSref="admin.quiz_result" [uiParams]="{ quizId: quiz.id }">
         Results
       </a>
     </li>

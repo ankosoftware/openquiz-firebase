@@ -1,0 +1,28 @@
+<div class="jumbotron margin-vertical-0">
+  <div class="container-fluid">
+    <h3>
+      {{quiz.name}}
+    </h3>
+    <p>
+      {{quiz.description}}
+    </p>
+  </div>
+  <ul class="nav nav-tabs">
+    <li>
+      <a uiSref="admin.quiz_result" [uiParams]="{ quizId: quiz.id }">
+        Questions
+      </a>
+    </li>
+    <li class="active">
+      <a class="active">
+        Results
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="container-fluid">
+  <div class="margin-vertical-10"></div>
+  <div class="well well-lg clearfix" *ngFor="let result of results">
+      {{result}}
+  </div>
+</div>
