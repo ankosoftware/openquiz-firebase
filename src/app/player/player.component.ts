@@ -5,7 +5,7 @@ import {MaterialComponent} from "../common/components/material/material.componen
 import {Quiz} from "../common/model/quiz.model";
 import {Topic} from "../common/model/topic.model";
 import {TopicService} from "../common/firebase/services/topic.service";
-import {IQuestionAnswer, Question} from "../common/model/question.model";
+import {IQuestionAnswer, Question, QuestionAnswer} from "../common/model/question.model";
 import {QuestionService} from "../common/firebase/services/question.service";
 import {QuizResultService} from "../common/firebase/services/quizresult.service";
 import {Observable} from "rxjs/Rx";
@@ -21,6 +21,8 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
 
   topics: Topic[] = [];
   questions: Question[] = [];
+  selectedAnswer: string;
+  answerText: string;
 
   state: string = 'created';
   started: Date = null;
@@ -55,7 +57,6 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
   }
 
   start() {
-    debugger;
     this.currentQuestion = this.questions[this.currentQuestionIndex];
     this.started = new Date();
     this.result = new QuizResult();
@@ -75,12 +76,27 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
     this.state = 'started';
   }
   next() {
+    switch(this.currentQuestion.answerType) {
+      case 'single_select':
+        this.answer(this.currentQuestion, [this.currentQuestion.answers.find(item=>item.id==this.selectedAnswer)]);
+        break;
+      case 'multi_select':
+        this.answer(this.currentQuestion, this.currentQuestion.answers.filter(item=>item._selected));
+        break;
+      case 'text':
+        this.answer(this.currentQuestion, [new QuestionAnswer({value: this.answerText})]);
+        break;
+    }
+    this.selectedAnswer = null;
+    this.answerText = null;
     this.currentQuestion = this.questions[++this.currentQuestionIndex];
   }
   finish() {
     this.complete();
   }
   skip() {
+    this.selectedAnswer = null;
+    this.answerText = null;
     this.currentQuestion = this.questions[++this.currentQuestionIndex];
   }
 
@@ -94,5 +110,8 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
   }
   complete() {
     this.state = 'completed';
+    this.result.end = new Date();
+    this.quizResultService.update(this.result).then(() => {
+    });
   }
 }

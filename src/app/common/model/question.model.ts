@@ -5,6 +5,7 @@ export interface IQuestionAnswer extends IBase {
   title: string;
   value: string;
   _correct?:boolean;
+  _selected?:boolean;
 }
 
 export class QuestionAnswer extends Base implements IQuestionAnswer {

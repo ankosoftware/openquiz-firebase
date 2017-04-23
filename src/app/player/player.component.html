@@ -55,7 +55,51 @@
           </div>
         </div>
         <div>
-
+          <div *ngIf="currentQuestion.answerType === 'single_select'">
+            <div class="row" *ngFor="let answer of currentQuestion.answers">
+              <div class="col-md-5 vertical">
+                <div class="radio radio-primary margin-top-21">
+                  <label>
+                    <input type="radio"
+                      name="radioAnswers"
+                      [value]="answer.id"
+                      [(ngModel)]="selectedAnswer">
+                    <span class="circle"></span>
+                    <span class="check"></span>
+                    {{answer.title}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="currentQuestion.answerType === 'multi_select'">
+            <div class="row" *ngFor="let answer of currentQuestion.answers">
+              <div class="col-md-5 vertical">
+                <div class="checkbox margin-top-21 margin-left-16">
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="ansewer-check{{answer.id}}"
+                      [(ngModel)]="answer._selected" >
+                    <span class="checkbox-material">
+                  <span class="check"></span>
+                </span>
+                   {{answer.title}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="currentQuestion.answerType === 'text'">
+            <input
+              type="text"
+              required
+              id="answerText"
+              placeholder="Please "
+              name="answerText"
+              [(ngModel)]="answerText"
+              class="form-control">
+            </div>
         </div>
       </div>
       <ul class="pager">
