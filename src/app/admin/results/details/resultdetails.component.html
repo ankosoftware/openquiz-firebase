@@ -29,6 +29,13 @@
       <div class="row-content">
         <div class="least-content">
           {{quizresult.end | date : 'medium'}}
+          <br/>
+          Score: {{quizresult.score}} of {{quizresult.maxScore}}
+          <br/>
+          Pass:
+          <span class="text-capitalize" [class.text-success]="quizresult.pass" [class.text-danger]="!quizresult.pass">
+            {{quizresult.pass ? 'True' : 'False'}}
+          </span>
         </div>
         <h4 class="list-group-item-heading">
           {{quizresult.user.displayName || quizresult.user}}
@@ -42,15 +49,32 @@
     <div class="list-group-separator"></div>
   </div>
 
-  <div class="well well-lg clearfix">
-    <pre>
-      {{quizresult | json}}
-    </pre>
-  </div>
-  <div class="well well-lg clearfix" *ngFor="let answer of quizresult.answers.entered">
-      score: {{quizresult.score}}
-  </div>
-  <div class="well well-lg clearfix">
-      pass: {{quizresult.pass}}
-  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Question</th>
+      <th>Answers</th>
+      <th>Score</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let answer of quizresult.answers">
+        <td>
+          {{answer.questionDetails?.title}}
+        </td>
+        <td>
+          <ul class="list-unstyled">
+            <li *ngFor="let enteredAnswer of answer.entered">
+              <p [class.text-danger]="!answer._correct" [class.text-success]="answer._correct">
+                {{enteredAnswer.title || enteredAnswer.value}}
+              </p>
+            </li>
+          </ul>
+        </td>
+        <td>
+          {{answer.score}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
