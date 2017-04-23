@@ -28,7 +28,7 @@
           <img [image]="result.user.photoURL || ''" style="width: 55px; height:55px; border-radius: 50%;" />
         </div>
         <div class="col-sm-7">
-          <a><h4>{{result.user.displayName || result.user}}</h4></a>
+          <a uiSref=""><h4>{{result.user.displayName || result.user}}</h4></a>
           <small>{{result.user.email || result.user}}</small>
         </div>
         <div class="col-sm-3">
