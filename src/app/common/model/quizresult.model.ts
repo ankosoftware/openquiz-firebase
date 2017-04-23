@@ -1,10 +1,11 @@
 import uuid from "uuid";
 import {Base} from "./base.model";
-import {IQuestionAnswer} from "./question.model";
+import {IQuestionAnswer, Question} from "./question.model";
 import {IUser} from "./user.model";
 
 export class ResultAnswer extends Base {
   question: string; // id
+  questionDetails: Question;
   entered: IQuestionAnswer[]; // entered answers
   correct: boolean;
   score: number;

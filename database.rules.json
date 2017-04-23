@@ -7,7 +7,7 @@
         ".write": "root.hasChild('superuser/' + auth.uid) && data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
-          ".validate": "newData.isString() && newData.val() === auth.uid"
+          ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
         }
       }
     },
@@ -18,18 +18,18 @@
         ".write": "root.hasChild('superuser/' + auth.uid) && data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
-          ".validate": "newData.isString() && newData.val() === auth.uid"
+          ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
         }
       }
     },
     "quiz": {
-      ".read": "auth != null",
+      ".read": "true",
       "$quiz": {
         ".read": "auth != null",
         ".write": "root.hasChild('superuser/' + auth.uid) && data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
-          ".validate": "newData.isString() && newData.val() === auth.uid"
+          ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
         }
       }
     },
@@ -37,10 +37,10 @@
       ".read": "root.hasChild('superuser/' + auth.uid)",
       "$quizresult": {
         ".read": "auth != null",
-        ".write": "data.val() === null || data.child('owner').val() === auth.uid",
+        ".write": "root.hasChild('superuser/' + auth.uid) || data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
-          ".validate": "newData.isString() && newData.val() === auth.uid"
+          ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
         }
       }
     },
@@ -50,7 +50,7 @@
         ".write": "data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
-          ".validate": "newData.isString() && newData.val() === auth.uid"
+          ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
         }
       }
     },

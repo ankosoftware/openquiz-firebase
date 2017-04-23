@@ -28,9 +28,10 @@ export class AnalisysServices {
             if (!question) {
               return;
             }
+            answ.questionDetails = question;
             return this.topicService.get(question.topicId).first().toPromise().then(topic => {
               answ.correct = AnalisysServices.isCorrect(question, answ);
-              let questionScore = topic && topic.pointsPerQuestion || 1;
+              let questionScore = topic && topic.pointsPerQuestion && +topic.pointsPerQuestion || 1;
               questionScore = questionScore > 0 ? questionScore : 1;
               maxScore += questionScore;
               if (answ.correct) {
