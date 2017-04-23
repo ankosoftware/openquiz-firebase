@@ -14,7 +14,7 @@ import {Quiz} from "../../common/model/quiz.model";
   inputs:['question'],
   templateUrl: './question.component.html'
 })
-export class QuestionComponent extends MaterialComponent implements OnInit{
+export class QuestionComponent implements OnInit{
 
   @Input() question: Question;
 
@@ -23,7 +23,6 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
   quizId: string = this.transition.params().quizId;
 
   constructor(protected questionService: QuestionService, private transition: Transition, private uiRouter: UIRouter, private storageService: StorageService) {
-    super();
   }
 
   ngOnInit(): void {
