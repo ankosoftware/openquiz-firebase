@@ -22,7 +22,7 @@ export class AdminComponent extends MaterialComponent implements OnInit {
       this.uiRouter.stateService.go('login');
     }
     if(!this.superuser) {
-      this.uiRouter.stateService.go('home');
+      this.uiRouter.stateService.go('makemeadmin');
     }
   }
 
