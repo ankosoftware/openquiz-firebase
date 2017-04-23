@@ -1,11 +1,11 @@
-import { ModuleWithProviders } from '@angular/core';
-import { UIRouterModule } from 'ui-router-ng2';
-import { AdminComponent } from './admin.component';
-import { QuizzesComponent } from './quizzes/list/quizzes.component';
-import { QuizComponent } from './quizzes/details/quiz.component';
-import { TopicComponent } from './topics/details/topic.component';
-import { QuestionComponent } from './questions/question.component';
-import { QuizService } from "../common/firebase/services/quiz.service";
+import {ModuleWithProviders} from "@angular/core";
+import {UIRouterModule} from "ui-router-ng2";
+import {AdminComponent} from "./admin.component";
+import {QuizzesComponent} from "./quizzes/list/quizzes.component";
+import {QuizComponent} from "./quizzes/details/quiz.component";
+import {TopicComponent} from "./topics/details/topic.component";
+import {QuestionComponent} from "./questions/question.component";
+import {QuizService} from "../common/firebase/services/quiz.service";
 import {Transition} from "ui-router-core/lib";
 import {AuthService} from "../common/firebase/services/auth.service";
 import {TopicService} from "../common/firebase/services/topic.service";
@@ -15,6 +15,7 @@ import {Query} from "angularfire2/interfaces";
 import {QuestionService} from "../common/firebase/services/question.service";
 import {ResultsComponent} from "./results/results.component";
 import {ResultDetailsComponent} from "./results/details/resultdetails.component";
+import {Superuser} from "../common/model/superuser.model";
 
 export function resolveQuizzes(quizService: QuizService, transition: Transition) {
   const query:Query = {
@@ -34,7 +35,9 @@ export function resolveUser(authService: AuthService) {
   return authService.getUser();
 }
 export function resolveSuperuser(authService: AuthService, superuserService: SuperuserService) {
-  return authService.getUser().then(user => superuserService.get(user.uid).first().toPromise());
+  return authService.getUser().then(user => superuserService.get(user.uid).first().toPromise().then(superuser => {
+    return !superuser ? resolveUser(authService).then(user => new Superuser(user)) : superuser;
+  }));
 }
 
 export function resolveTopic(topicService: TopicService, transition: Transition) {
