@@ -5,6 +5,7 @@ export abstract class Base implements IBase {
 
   id?: string;
   owner?: string;
+  isOwner = false;
 
   constructor(json: any = {}) {
     Object.assign(this, json);
@@ -23,6 +24,7 @@ export abstract class Base implements IBase {
       }
     }
     delete obj.id;
+    delete obj.isOwner;
 
     return obj;
   }

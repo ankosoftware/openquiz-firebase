@@ -41,7 +41,11 @@ export abstract class FirebaseService<T extends Base> {
     if (json.$exists && !json.$exists()) {
       return null;
     }
-    return this.toModel(json);
+    let model = this.toModel(json);
+    if (this.user) {
+      model.isOwner = (this.user.uid === model.owner);
+    }
+    return model;
   }
 
   protected onCatch(err: any, caught?: any) {
