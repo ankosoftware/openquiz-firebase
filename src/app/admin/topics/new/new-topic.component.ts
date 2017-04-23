@@ -21,17 +21,19 @@ export class NewTopicComponent extends DialogComponent<Topic, Topic> implements 
   }
   onSubmit(form:NgForm, event) {
     event.preventDefault();
-    if(form.valid) {
-      this.result = new Topic({
-        id: this.id,
-        name: this.name,
-        description: this.description,
-        questionTimeLimit: this.questionTimeLimit,
-        numberOfQuestions: this.numberOfQuestions,
-        pointsPerQuestion: this.pointsPerQuestion,
-        randomizeQuestions: this.randomizeQuestions
-      });
+    if(!form.valid) {
+      return;
     }
+
+    this.result = new Topic({
+      id: this.id,
+      name: this.name,
+      description: this.description,
+      questionTimeLimit: this.questionTimeLimit,
+      numberOfQuestions: this.numberOfQuestions,
+      pointsPerQuestion: this.pointsPerQuestion,
+      randomizeQuestions: this.randomizeQuestions
+    });
     this.close();
   }
 }
