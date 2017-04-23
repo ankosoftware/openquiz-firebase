@@ -19,6 +19,16 @@ export abstract class FirebaseService<T extends Base> {
 
   protected abstract toModel(json: any): T;
 
+  protected resToModel(json: any): T {
+    if (!json) {
+      return json;
+    }
+    if (json.$exists && !json.$exists()) {
+      return null;
+    }
+    return this.toModel(json);
+  }
+
   protected onCatch(err: any, caught?: any) {
     console.log('DB Error', err);
     if (err && err.code === "PERMISSION_DENIED") {
@@ -32,7 +42,7 @@ export abstract class FirebaseService<T extends Base> {
   }
 
   protected arrayToModel(array: any[]): T[] {
-    return array && array.map(this.toModel);
+    return array && array.map((json) => this.resToModel(json));
   }
 
   protected object(key: string): FirebaseObjectObservable<T> {
@@ -73,9 +83,12 @@ export abstract class FirebaseService<T extends Base> {
   }
 
   get(key: string): Observable<T> {
-    return key && this.object(key).map(json => this.toModel(json)).catch((err, caught) => this.errorHandler(err, caught));
+    return key && this.object(key).map(json => this.resToModel(json)).catch((err, caught) => this.errorHandler(err, caught));
   }
 
+  updateById(key: string, item: T): Thenable<void> {
+    return item && key && this.object(key).update(item.toJSON()).catch(err => this.onCatch(err));
+  }
   update(item: T): Thenable<void> {
     return item && item.id && this.object(item.id).update(item.toJSON()).catch(err => this.onCatch(err));
   }
@@ -83,6 +96,7 @@ export abstract class FirebaseService<T extends Base> {
   remove(key: string): Thenable<void> {
     return key && this.items().remove(key).catch(err => this.onCatch(err));
   }
+
   query(): firebase.database.Query {
     return this.db.list(this.url).$ref;
   }
