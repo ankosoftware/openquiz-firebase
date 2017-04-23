@@ -23,7 +23,8 @@
     .user-dropdown {
       .dropdown-toggle {
         @avatar-size: 34px;
-        padding: ((@navbar-height - @avatar-size) / 2) 0;
+        padding: ((@navbar-height - @avatar-size) / 2) 16px;
+        margin-right: -16px;
 
         .user-avatar {
           display: block;
@@ -32,6 +33,42 @@
           overflow: hidden;
           border-radius: @avatar-size / 2;
           line-height: 0;
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+
+      &-menu {
+        min-width: 300px;
+        padding: 16px 32px;
+        border-radius: 1px;
+        margin-top: -42px;
+
+        &-container {
+          display: table;
+          color: fade(black, 87%);
+
+          & > * {
+            float: none;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+
+        p {
+          max-width: 160px;
+          color: fade(black, 87%);
+        }
+
+        .user-avatar {
+          width: 56px;
+          height: 56px;
+          overflow: hidden;
+          border-radius: 28px;
+          line-height: 0;
+          margin-right: 16px;
 
           img {
             width: 100%;
