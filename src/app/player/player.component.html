@@ -5,53 +5,95 @@
         Open Quiz
       </a>
     </div>
-    <div class="text-center h3">
-      {{quiz.name}}
-    </div>
-    <div class="pull-right h4" style="margin-top:-36px;" *ngIf="state==='started'">
-      {{timeLeft | date : 'mm:ss'}}
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right" *ngIf="state==='started'">
+        <li *ngIf="timeLeft">
+          <a>{{timeLeft | date : 'mm:ss'}} left</a>
+        </li>
+        <li>
+          <a>{{currentQuestionIndex}} / {{questions.length}}</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
-<div class="container">
-    <div *ngIf="state === 'created'" class="well bs-component">
-      <p>{{quiz.description}}</p>
-      <p>
-        Topics:
-      </p>
-      <ul>
-        <li *ngFor="let topic of topics">
-          {{topic.name}}
-        </li>
-      </ul>
-      <p>
-        Questions: {{questions.length}}
-      </p>
-      <p *ngIf="quiz.totalTimeLimit">
-        Time Limit: {{quiz.totalTimeLimit}} minutes
-      </p>
-      <p class="text-center">
-        <button (click)="start()" class="btn btn-primary btn-lg">Start</button>
-      </p>
-    </div>
-    <div *ngIf="state === 'started'">
-      <div class="pull-right">
-        {{currentQuestionIndex}}/{{questions.length}}
+
+<div class="jumbotron">
+  <div class="container-fluid">
+    <h3>
+      {{quiz.name}}
+    </h3>
+    <p>
+      {{quiz.description}}
+    </p>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row" *ngIf="state === 'created'">
+    <div class="col-lg-8 col-lg-offset-2">
+      <div class="well well-lg bs-component">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-2">
+              Topics:
+            </label>
+            <div class="col-md-10">
+              <p *ngFor="let topic of topics" class="text-muted">
+                {{topic.name}}
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-2">
+              Questions:
+            </label>
+            <div class="col-md-10">
+              <p>
+                {{questions.length}}
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="quiz.totalTimeLimit">
+            <label class="col-md-2">
+              Time Limit:
+            </label>
+            <div class="col-md-10">
+              <p>
+                {{quiz.totalTimeLimit}} minutes
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <button (click)="start()" class="btn btn-raised btn-primary btn-lg">
+              Start Quiz
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="state === 'started'">
+    <div class="col-lg-8 col-lg-offset-2">
+      <div class="well well-lg bs-component">
         <div>
           <div *ngIf="currentQuestion.questionType == 'text'">
             {{currentQuestion.content}}
           </div>
-          <div *ngIf="currentQuestion.questionType == 'image'">
-            <img [image]="currentQuestion.content"/>
+          <div *ngIf="currentQuestion.questionType == 'image'" class="text-center">
+            <img [image]="currentQuestion.content" style="max-width: 100%;"/>
           </div>
           <div *ngIf="currentQuestion.questionType == 'md'">
             <div class="row">
-                <markdown [data]="currentQuestion.content"></markdown>
+              <markdown [data]="currentQuestion.content"></markdown>
             </div>
           </div>
         </div>
+
         <div>
           <div *ngIf="currentQuestion.answerType === 'single_select'">
             <div class="row" *ngFor="let answer of currentQuestion.answers">
@@ -59,9 +101,9 @@
                 <div class="radio radio-primary margin-top-21">
                   <label>
                     <input type="radio"
-                      name="radioAnswers"
-                      [value]="answer.id"
-                      [(ngModel)]="selectedAnswer">
+                           name="radioAnswers"
+                           [value]="answer.id"
+                           [(ngModel)]="selectedAnswer">
                     <span class="circle"></span>
                     <span class="check"></span>
                     {{answer.title}}
@@ -78,35 +120,57 @@
                     <input
                       type="checkbox"
                       name="ansewer-check{{answer.id}}"
-                      [(ngModel)]="answer._selected" >
+                      [(ngModel)]="answer._selected">
                     <span class="checkbox-material">
                   <span class="check"></span>
                 </span>
-                   {{answer.title}}
+                    {{answer.title}}
                   </label>
                 </div>
               </div>
             </div>
           </div>
-          <div *ngIf="currentQuestion.answerType === 'text'">
+          <div *ngIf="currentQuestion.answerType === 'text'" class="form-group label-floating"
+               [class.is-empty]="!answerText">
+            <label class="control-label">
+              Please, write your answer
+            </label>
             <input
               type="text"
               required
               id="answerText"
-              placeholder="Please "
               name="answerText"
               [(ngModel)]="answerText"
-              class="form-control">
-            </div>
+              class="form-control"
+            >
+          </div>
         </div>
+
+        <ul class="pager">
+          <li class="previous" *ngIf="currentQuestionIndex!==questions.length-1">
+            <button type="button" class="btn btn-default" (click)="skip()">
+              Skip
+            </button>
+          </li>
+          <li class="next" *ngIf="currentQuestionIndex!==questions.length-1">
+            <button type="button" class="btn btn-primary btn-raised" (click)="next()">
+              Next
+            </button>
+          </li>
+          <li class="next" *ngIf="currentQuestionIndex===questions.length-1">
+            <button type="button" class="btn btn-primary btn-raised" (click)="finish()">
+              Finish
+            </button>
+          </li>
+        </ul>
+
       </div>
-      <ul class="pager">
-        <li class="previous" *ngIf="currentQuestionIndex!==questions.length-1"><a (click)="skip()">Skip</a></li>
-        <li class="next" *ngIf="currentQuestionIndex!==questions.length-1" ><a class="withripple" (click)="next()">Next →</a></li>
-        <li class="next" *ngIf="currentQuestionIndex===questions.length-1"><a class="withripple" (click)="finish()">Finish</a></li>
-      </ul>
     </div>
-    <div *ngIf="state === 'completed'">
-      <h1>Congratulations!</h1>
-    </div>
+  </div>
+
+  <div *ngIf="state === 'completed'">
+    <h1 class="text-center text-info">
+      Congratulations!
+    </h1>
+  </div>
 </div>
