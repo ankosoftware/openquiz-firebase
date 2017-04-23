@@ -8,13 +8,28 @@ import {ObservableInput} from "rxjs/Observable";
 import {UIRouter} from "ui-router-ng2";
 import {Query} from "angularfire2/interfaces";
 import {FirebasePage} from "./firebasepage";
+import {User} from "../../model/user.model";
 
 export abstract class FirebaseService<T extends Base> {
 
   db: AngularFireDatabase;
+  protected user: User;
 
-  constructor(af: AngularFire, protected uiRouter: UIRouter, private url: string) {
+  constructor(protected af: AngularFire, protected uiRouter: UIRouter, private url: string) {
     this.db = af.database;
+    this.getUser().then(() => {
+    });
+  }
+
+  protected getUser(): Promise<User> {
+    return this.af.auth.first().toPromise().then(data => {
+      let user = data && data.auth && new User(data.auth);
+      if (user) {
+        user.owner = user.uid;
+      }
+      this.user = user;
+      return user;
+    });
   }
 
   protected abstract toModel(json: any): T;
@@ -54,6 +69,22 @@ export abstract class FirebaseService<T extends Base> {
   }
 
   create(item: T): Promise<T> {
+    if (this.user != null) {
+      item.owner = this.user.uid;
+      return this.createInternal(item);
+    } else {
+      return this.getUser().then(() => {
+        if (this.user === null) {
+          throw new Error('Not authorized');
+        } else {
+          item.owner = this.user.uid;
+          return this.createInternal(item);
+        }
+      });
+    }
+  }
+
+  createInternal(item: T): Promise<T> {
     return item && this.items()
         .push(item.toJSON()).catch(err => this.onCatch(err))
         .then(ref => this.get(ref.key).first().toPromise());
@@ -89,6 +120,7 @@ export abstract class FirebaseService<T extends Base> {
   updateById(key: string, item: T): Thenable<void> {
     return item && key && this.object(key).update(item.toJSON()).catch(err => this.onCatch(err));
   }
+
   update(item: T): Thenable<void> {
     return item && item.id && this.object(item.id).update(item.toJSON()).catch(err => this.onCatch(err));
   }
