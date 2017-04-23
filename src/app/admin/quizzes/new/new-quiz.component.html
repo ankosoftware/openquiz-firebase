@@ -10,7 +10,7 @@
             {{isNew() ? 'New Quiz' : 'Edit Quiz'}}
           </h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body padding-top-15">
           <div class="form-group label-floating" [class.is-empty]="!name">
             <label class="control-label" for="quiz-name">
               Quiz Name
@@ -25,7 +25,7 @@
             >
           </div>
           <div class="form-group">
-            <label class="control-label" for="description">
+            <label class="control-label margin-top-0" for="description">
               Description
             </label>
             <textarea class="form-control" id="description" name="description"
@@ -70,7 +70,7 @@
           <button type="button" class="btn btn-default" (click)="close()">
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-raised btn-primary">
             {{isNew() ? 'Create Quiz' : 'Save Quiz'}}
           </button>
         </div>
