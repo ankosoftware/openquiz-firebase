@@ -57,7 +57,7 @@
               id="number-of-questions"
               name="number-of-questions"
               [(ngModel)]="numberOfQuestions"
-              min="0"
+              min="1"
               #numberQuestions="ngModel"
             >
           </div>
@@ -66,12 +66,13 @@
               Points per Question
             </label>
             <input
+              required
               class="form-control"
               type="text"
               id="point-per-question"
               name="point-per-question"
               [(ngModel)]="pointsPerQuestion"
-              min="0"
+              min="1"
               #points="ngModel"
             >
           </div>

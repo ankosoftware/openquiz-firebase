@@ -62,7 +62,12 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
     this.result = new QuizResult();
     this.result.start = this.started;
     this.result.quiz = this.quiz.id;
-    this.result.user = this.user.email;
+    this.result.user = {
+      uid: this.user.uid,
+      email: this.user.email,
+      displayName: this.user.displayName,
+      photoURL: this.user.photoURL
+    };
     this.quizResultService.create(this.result).then((res) => this.result = res);
     if(this.quiz.totalTimeLimit) {
       this.timeLeft = this.quiz.totalTimeLimit * 60 * 1000 - (Date.now() - this.started.getTime());
@@ -75,7 +80,8 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
     }
     this.state = 'started';
   }
-  next() {
+
+  sendAnswer() {
     switch(this.currentQuestion.answerType) {
       case 'single_select':
         this.answer(this.currentQuestion, [this.currentQuestion.answers.find(item=>item.id==this.selectedAnswer)]);
@@ -89,9 +95,14 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
     }
     this.selectedAnswer = null;
     this.answerText = null;
+  }
+
+  next() {
+    this.sendAnswer();
     this.currentQuestion = this.questions[++this.currentQuestionIndex];
   }
   finish() {
+    this.sendAnswer();
     this.complete();
   }
   skip() {

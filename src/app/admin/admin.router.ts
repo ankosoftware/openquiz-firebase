@@ -12,6 +12,7 @@ import {TopicService} from "../common/firebase/services/topic.service";
 import {SuperuserService} from "../common/firebase/services/superuser.service";
 import {Query} from "angularfire2/interfaces";
 import {QuestionService} from "../common/firebase/services/question.service";
+import {ResultsComponent} from "./results/results.component";
 
 export function resolveQuizzes(quizService: QuizService, transition: Transition) {
   const query:Query = {
@@ -69,6 +70,16 @@ export const states = [
     name: 'admin.quiz',
     url: '/quizzes/:quizId',
     component: QuizComponent,
+    resolve: [{
+      token: 'quiz',
+      deps: [QuizService, Transition],
+      resolveFn: resolveQuiz
+    }]
+  },
+  {
+    name: 'admin.quiz_result',
+    url: '/quizzes/:quizId/results',
+    component: ResultsComponent,
     resolve: [{
       token: 'quiz',
       deps: [QuizService, Transition],

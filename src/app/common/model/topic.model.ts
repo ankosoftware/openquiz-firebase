@@ -18,5 +18,6 @@ export class Topic extends Base implements ITopic {
   randomizeQuestions: boolean;
   constructor(json?: any) {
     super(json);
+    this.pointsPerQuestion = this.pointsPerQuestion || 1;
   }
 }

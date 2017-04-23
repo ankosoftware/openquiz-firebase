@@ -16,16 +16,17 @@ export abstract class Base implements IBase {
     let obj:any = {};
     Object.assign(obj, this);
     for (let key in obj) {
-      if (!obj[key]) {
-        delete obj[key];
-      }
-      if(key.startsWith('_')) {
-        delete obj[key];
+      if(obj.hasOwnProperty(key)) {
+        if (!obj[key]) {
+          delete obj[key];
+        }
+        if (key.startsWith('_')) {
+          delete obj[key];
+        }
       }
     }
     delete obj.id;
     delete obj.isOwner;
-
     return obj;
   }
 }
