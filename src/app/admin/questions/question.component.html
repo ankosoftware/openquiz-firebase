@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-5">
           <div class="form-group">
             <label class="control-label" for="answers-type">
               Answers
@@ -115,48 +115,86 @@
         </div>
       </div>
       <div *ngIf="question.answerType === 'multi_select'">
-        <ul>
-          <li *ngFor="let answer of question.answers let index = index">
-            <label>
-              <input
-                type="checkbox"
-                name="ansewer-check{{index}}"
-                [(ngModel)]="answer._correct"
-                (change)="answerSelectionChanged(answer)"
-              >
+        <div class="row" *ngFor="let answer of question.answers let index = index">
+          <div class="col-md-5 vertical">
+            <div class="form-group label-floating" [class.is-empty]="!answer.title">
+              <label class="control-label" for="ansewer-title{{index}}">
+                Enter Answer
+              </label>
               <input
                 type="text"
                 required
+                id="ansewer-title{{index}}"
                 name="ansewer-title{{index}}"
                 [(ngModel)]="answer.title"
-                placeholder="Enter answer text"
                 class="form-control"
               >
-            </label>
-            <div class="pull-left">
-              <button type="button" class="btn btn-danger btn-sm" (click)="removeAnswer(answer)">
-                x
-              </button>
             </div>
-          </li>
-        </ul>
+
+            <div class="checkbox margin-top-21 margin-left-16">
+              <label>
+                <input
+                  type="checkbox"
+                  name="ansewer-check{{index}}"
+                  [(ngModel)]="answer._correct"
+                  (change)="answerSelectionChanged(answer)"
+                >
+                <span class="checkbox-material">
+                  <span class="check"></span>
+                </span>
+                Correct Answer
+              </label>
+            </div>
+
+            <div class="margin-left-16 margin-top-5">
+              <a role="button" class="text-danger" (click)="removeAnswer(answer)">
+                <i class="material-icons">
+                  &#xE92B;
+                </i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
       <div *ngIf="question.answerType === 'text'">
-        <ul>
-          <li *ngFor="let answer of question.correctAnswer let index = index">
-            <label>
-              <input type="text" required name="ansewer-title{{index}}" [(ngModel)]="answer.title"
-                     placeholder="Enter answer text" class="form-control">
-              <input type="text" required name="ansewer-value{{index}}" [(ngModel)]="answer.value"
-                     placeholder="Enter right answer" class="form-control">
-            </label>
-            <div class="pull-left">
-              <button type="button" class="btn btn-danger btn-sm" (click)="removeAnswer(answer)">
-                x
-              </button>
+        <div class="row" *ngFor="let answer of question.correctAnswer let index = index">
+          <div class="col-md-5 vertical">
+            <div class="form-group label-floating" [class.is-empty]="!answer.title">
+              <label class="control-label" for="ansewer-title{{index}}">
+                Enter Answer
+              </label>
+              <input
+                type="text"
+                required
+                id="ansewer-title{{index}}"
+                name="ansewer-title{{index}}"
+                [(ngModel)]="answer.title"
+                class="form-control"
+              >
             </div>
-          </li>
-        </ul>
+
+            <div class="form-group label-floating margin-left-16" [class.is-empty]="!answer.title">
+              <label class="control-label" for="ansewer-title{{index}}">
+                Right Answer
+              </label>
+              <input
+                type="text"
+                required
+                name="ansewer-value{{index}}"
+                [(ngModel)]="answer.value"
+                class="form-control"
+              >
+            </div>
+
+            <div class="margin-left-16 margin-top-5">
+              <a role="button" class="text-danger" (click)="removeAnswer(answer)">
+                <i class="material-icons">
+                  &#xE92B;
+                </i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <button type="button" *ngIf="question.answerType" class="btn btn-default btn-sm" (click)="addAnswer()">

@@ -9,7 +9,10 @@ import {Component, Output, Input, EventEmitter} from '@angular/core';
            (drop)="onDrop($event)"
            (dragover)="dragover($event)">
       <img *ngIf="img" [image]="img">
-      <div>Browse image<br>on your computer<br>or drag and drop<br>here</div>
+      <div class="text-info text-center" *ngIf="!img">
+        <i class="material-icons">&#xE2C6;</i>
+        Browse image on your computer or drag and drop here
+      </div>
     </label>
   `
 })
