@@ -24,6 +24,8 @@ export class QuizResult extends Base {
   answers: ResultAnswer[];
   score: number;
   maxScore: number;
+  passScore: number;
+  pass: boolean;
 
   constructor(json?: any) {
     super(json);
