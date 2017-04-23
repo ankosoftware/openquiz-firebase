@@ -15,7 +15,7 @@ export class QuestionService extends FirebaseService<Question> {
   randomQuestions(count: number, query?: Query): Promise<Question[]> {
     return this.list(query).then(page => {
       let arr = page.data;
-      if (arr.length < count) {
+      if (arr.length < count || !count) {
         return arr;
       }
       let res = [];

@@ -11,6 +11,7 @@ import { LandingComponent } from './landing/landing.component';
 
 import { routing } from './app.router';
 import {MakeMeAdminComponent} from "./makemeadmin.component";
+import {PlayerModule} from "./player/player.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {MakeMeAdminComponent} from "./makemeadmin.component";
     BootstrapModalModule,
     GeneralModule,
     AdminModule,
+    PlayerModule,
     routing
   ],
   providers: [],

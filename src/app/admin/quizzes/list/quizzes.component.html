@@ -44,6 +44,9 @@
         <button type="button" class="btn btn-default btn-sm" (click)="editQuiz(quiz)">
           Edit
         </button>
+        <a uiSref="player" [uiParams]="{quizId: quiz.id}" class="btn btn-default btn-sm" >
+          Preview
+        </a>
         <button type="button" class="btn btn-default btn-sm" (click)="deleteQuiz(quiz)">
           Delete
         </button>

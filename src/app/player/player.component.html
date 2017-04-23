@@ -1,0 +1,43 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" uiSref="home">
+        Open Quiz
+      </a>
+    </div>
+    <div class="text-center h3">
+      {{quiz.name}}
+    </div>
+    <div class="pull-right h4" style="margin-top:-36px;" *ngIf="state==='started'">
+      {{timeLeft | date : 'mm:ss'}}
+    </div>
+  </div>
+</nav>
+<div class="container">
+    <div *ngIf="state === 'created'" class="well bs-component">
+      <p>{{quiz.description}}</p>
+      <p>
+        Topics:
+      </p>
+      <ul>
+        <li *ngFor="let topic of topics">
+          {{topic.name}}
+        </li>
+      </ul>
+      <p>
+        Questions: {{questions.length}}
+      </p>
+      <p *ngIf="quiz.totalTimeLimit">
+        Time Limit: {{quiz.totalTimeLimit}} minutes
+      </p>
+      <p class="text-center">
+        <button (click)="start()" class="btn btn-primary btn-lg">Start</button>
+      </p>
+    </div>
+    <div *ngIf="state === 'started'">
+
+    </div>
+    <div *ngIf="state === 'completed'">
+
+    </div>
+</div>
