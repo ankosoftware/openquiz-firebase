@@ -37,9 +37,28 @@
               <img src="{{user.photoURL}}" alt="icon">
             </span>
           </a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a (click)="logout()">logout</a></li>
-          </ul>
+          <div class="dropdown-menu user-dropdown-menu clearfix" role="menu">
+            <div class="user-dropdown-menu-container">
+              <div class="user-avatar">
+                <img src="{{user.photoURL}}" alt="icon">
+              </div>
+              <div>
+                <h5 class="margin-vertical-0 text-overflow">
+                  <strong>{{user.displayName}}</strong>
+                </h5>
+                <p class="margin-vertical-0 text-overflow">
+                  {{user.email}}
+                </p>
+                <div class="margin-top-10">
+                  <a class="text-uppercase" role="button" (click)="logout()">
+                    <strong>
+                      Sign out
+                    </strong>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
