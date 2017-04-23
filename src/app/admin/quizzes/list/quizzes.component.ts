@@ -6,6 +6,7 @@ import {Quiz} from "../../../common/model/quiz.model";
 import {QuizService} from "../../../common/firebase/services/quiz.service";
 import {ConfirmComponent} from "../../../common/components/confirm/confirm.component";
 import { MaterialComponent } from "../../../common/components/material/material.component";
+import {FirebasePage} from "../../../common/firebase/services/firebasepage";
 
 @Component({
   inputs: ['quizzes'],
@@ -16,7 +17,7 @@ export class QuizzesComponent extends MaterialComponent implements OnInit{
     console.log(this.quizzes)
   }
 
-  @Input() quizzes: Quiz[] = [];
+  @Input() quizzes: FirebasePage<Quiz> = { data: [], length: 0};
   constructor(
     protected dialogService: DialogService,
     protected quizService: QuizService,
@@ -32,7 +33,7 @@ export class QuizzesComponent extends MaterialComponent implements OnInit{
       if(quiz) {
         if (quiz.id) {
           this.quizService.update(quiz).then((res) => {
-            const _quiz = this.quizzes.find(item=>item.id === quiz.id);
+            const _quiz = this.quizzes.data.find(item=>item.id === quiz.id);
             Object.assign(_quiz, quiz);
             this.chRef.detectChanges();
           });

@@ -7,6 +7,7 @@ import "rxjs/add/operator/catch";
 import {ObservableInput} from "rxjs/Observable";
 import {UIRouter} from "ui-router-ng2";
 import {Query} from "angularfire2/interfaces";
+import {FirebasePage} from "./firebasepage";
 
 export abstract class FirebaseService<T extends Base> {
 
@@ -38,7 +39,7 @@ export abstract class FirebaseService<T extends Base> {
     return this.db.object(this.url + `/${key}`);
   }
 
-  protected items(query: Query={}): FirebaseListObservable<T[]> {
+  protected items(query: Query = {}): FirebaseListObservable<T[]> {
     return this.db.list(this.url, {query});
   }
 
@@ -48,8 +49,19 @@ export abstract class FirebaseService<T extends Base> {
         .then(ref => this.get(ref.key).first().toPromise());
   }
 
-  list(query?: Query): Observable<T[]> {
-    return this.items(query).map(json => this.arrayToModel(json)).catch((err, caught) => this.errorHandler(err, caught));
+  list(query?: Query, skip?: number, limit?: number): Promise<FirebasePage<T>> {
+    return this.items(query).map(json => {
+      let skiped = +skip || 0;
+      let limited = +limit || 0;
+      let length = json && json.length || 0;
+      let data = json && (skiped || limited) ? limited > 0
+        ? json.splice(skiped, limited) : json.splice(skiped)
+        : json;
+      return {
+        data: data,
+        length: length
+      }
+    }).catch((err, caught) => this.errorHandler(err, caught)).first().toPromise();
   }
 
   getList(keys: string[]): Promise<T[]> {
@@ -68,7 +80,7 @@ export abstract class FirebaseService<T extends Base> {
     return item && item.id && this.object(item.id).update(item.toJSON()).catch(err => this.onCatch(err));
   }
 
-  remove(key:string): Thenable<void> {
+  remove(key: string): Thenable<void> {
     return key && this.items().remove(key).catch(err => this.onCatch(err));
   }
 }
