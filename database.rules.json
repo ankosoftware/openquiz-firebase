@@ -1,11 +1,10 @@
 {
   "rules": {
-    ".write": "auth != null",
     "topic": {
       ".read": "auth != null",
       "$topic": {
         ".read": "auth != null",
-        ".write": "root.hasChild('superuser/' + auth.uid) && data.val() === null || data.child('owner').val() === auth.uid",
+        ".write": "data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
           ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
@@ -16,7 +15,7 @@
       ".read": "auth != null",
       "$question": {
         ".read": "auth != null",
-        ".write": "root.hasChild('superuser/' + auth.uid) && data.val() === null || data.child('owner').val() === auth.uid",
+        ".write": "data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
           ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
@@ -27,7 +26,7 @@
       ".read": "true",
       "$quiz": {
         ".read": "auth != null",
-        ".write": "root.hasChild('superuser/' + auth.uid) && data.val() === null || data.child('owner').val() === auth.uid",
+        ".write": "data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
           ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
@@ -38,7 +37,7 @@
       ".read": "auth != null",
       "$quizresult": {
         ".read": "auth != null",
-        ".write": "root.hasChild('superuser/' + auth.uid) || data.val() === null || data.child('owner').val() === auth.uid",
+        ".write": "auth != null",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
           ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
@@ -49,7 +48,7 @@
       ".read": "auth != null",
       "$superuser": {
         ".read": "root.hasChild('superuser/' + auth.uid) || $superuser === auth.uid",
-        ".write": "data.val() === null || data.child('owner').val() === auth.uid",
+        ".write": "auth != null && data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
           ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
