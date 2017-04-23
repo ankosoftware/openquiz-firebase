@@ -4,7 +4,9 @@ import {Question} from "../../common/model/question.model";
 import {TopicService} from "../../common/firebase/services/topic.service";
 import {QuizService} from "../../common/firebase/services/quiz.service";
 import {QuizResultService} from "../../common/firebase/services/quizresult.service";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class AnalisysServices {
 
   constructor(protected questionService: QuestionService,
