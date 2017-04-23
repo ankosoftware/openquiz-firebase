@@ -1,9 +1,31 @@
-.landing-hero {
-  display: table;
-  min-height: 406px;
+.landing {
+  min-height: 100vh;
+  position: relative;
 
-  &-container {
-    display: table-cell;
-    vertical-align: middle;
+  &-hero {
+    display: table;
+    min-height: 406px;
+
+    &-container {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
+  &-footer {
+    box-shadow: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60px;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 60px;
+    margin-top: 25px;
   }
 }
