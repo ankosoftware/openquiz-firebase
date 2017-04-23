@@ -1,9 +1,10 @@
 import uuid from "uuid";
 import {Base} from "./base.model";
+import {IQuestionAnswer} from "./question.model";
 
 export class ResultAnswer extends Base {
   question: string; // id
-  entered: string[]; // entered answers
+  entered: IQuestionAnswer[]; // entered answers
 
   constructor(json?: any) {
     super(json);

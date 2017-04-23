@@ -5,7 +5,7 @@ import {MaterialComponent} from "../common/components/material/material.componen
 import {Quiz} from "../common/model/quiz.model";
 import {Topic} from "../common/model/topic.model";
 import {TopicService} from "../common/firebase/services/topic.service";
-import {Question} from "../common/model/question.model";
+import {IQuestionAnswer, Question} from "../common/model/question.model";
 import {QuestionService} from "../common/firebase/services/question.service";
 import {QuizResultService} from "../common/firebase/services/quizresult.service";
 import {Observable} from "rxjs/Rx";
@@ -70,7 +70,7 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
     }
   }
 
-  answer(question: Question, entered: string[]) {
+  answer(question: Question, entered: IQuestionAnswer[]) {
     let res = new ResultAnswer();
     res.question = question.id;
     res.entered = entered;
