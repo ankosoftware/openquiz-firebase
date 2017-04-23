@@ -30,7 +30,7 @@
             <textarea class="form-control" id="description" name="description"
                       [(ngModel)]="description"></textarea>
           </div>
-          <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating" [class.is-empty]="!questionTimeLimit">
             <label class="control-label" for="question-time-limit">
               Question Time Limit (minutes)
             </label>
@@ -42,7 +42,7 @@
               [(ngModel)]="questionTimeLimit"
             >
           </div>
-          <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating" [class.is-empty]="!numberOfQuestions">
             <label class="control-label" for="number-of-questions">
               Number of Questions
             </label>
@@ -54,7 +54,7 @@
               [(ngModel)]="numberOfQuestions"
             >
           </div>
-          <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating" [class.is-empty]="!pointsPerQuestion">
             <label class="control-label" for="point-per-question">
               Points per Question
             </label>
