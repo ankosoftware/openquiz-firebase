@@ -23,7 +23,7 @@
       }
     },
     "quiz": {
-      ".read": "auth != null",
+      ".read": "true",
       "$quiz": {
         ".read": "auth != null",
         ".write": "root.hasChild('superuser/' + auth.uid) && data.val() === null || data.child('owner').val() === auth.uid",
