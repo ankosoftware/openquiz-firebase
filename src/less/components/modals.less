@@ -1,3 +1,44 @@
 .modal {
   display: block;
+
+  &-dialog {
+    max-width: 460px;
+  }
+
+  &-content {
+    box-shadow: 0 4px 16px 1px rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
+  }
+
+  &-header {
+    padding: 20px !important;
+    background-color: @brand-secondary;
+
+    .close {
+      color: white;
+      text-shadow: none;
+      opacity: .87;
+      margin-top: 1px;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-title {
+    color: white;
+  }
+
+  &-footer {
+    padding: 0 20px 20px !important;
+
+    .btn:not(.btn-raised) {
+      color: @brand-primary !important;
+    }
+
+    .btn {
+      font-weight: 600;
+      font-size: .97em;
+    }
+  }
 }

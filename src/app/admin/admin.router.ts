@@ -13,11 +13,9 @@ import {Query} from "angularfire2/interfaces";
 
 export function resolveQuizzes(quizService: QuizService, transition: Transition) {
   const query:Query = {
-    orderByChild: 'name',
-    startAt: +transition.params().skip || 0,
-    limitToFirst: +transition.params().limit || 10
+    orderByChild: 'name'
   };
-  return quizService.list(query).first().toPromise();
+  return quizService.list(query, transition.params().skip, +transition.params().limit || 10);
 }
 
 export function resolveQuiz(quizService: QuizService, transition: Transition)  {
