@@ -20,6 +20,7 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
 
   selectedAnswer: string;
   uploadProggress: number = 0;
+  quizId: string = this.transition.params().quizId;
 
   constructor(protected questionService: QuestionService, private transition: Transition, private uiRouter: UIRouter, private storageService: StorageService) {
     super();
