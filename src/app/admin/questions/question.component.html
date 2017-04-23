@@ -9,7 +9,7 @@
 <div class="container-fluid">
   <div class="well well-lg">
     <form name="form" #form="ngForm" (ngSubmit)="onSubmit(form, $event);" novalidate>
-      <div class="form-group label-floating" [class.is-empty]="!question.title">
+      <div class="form-group label-floating" [class.is-empty]="!question.title" [class.questionTitle]="form.submitted && !questionTitle.valid">
         <label class="control-label" for="question-name">
           Question
         </label>
@@ -19,6 +19,8 @@
           id="question-name"
           name="question-name"
           [(ngModel)]="question.title"
+          required
+          #questionTitle="ngModel"
         >
       </div>
       <div class="form-group">
