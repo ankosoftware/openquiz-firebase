@@ -17,7 +17,6 @@ export class LoginComponent extends MaterialComponent implements OnInit {
   ngOnInit(): void {
     if(this.user) {
       if(this.transition.params().source) {
-        debugger;
         window.location.href = decodeURIComponent(this.transition.params().source);
       }
       else {
