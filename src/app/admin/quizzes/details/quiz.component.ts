@@ -44,6 +44,7 @@ export class QuizComponent implements OnInit{
       }
     });
   }
+
   deleteTopic(topic: Topic) {
     this.dialogService.addDialog(ConfirmComponent, {title:'Delete Topic', message: `Are you sure you want to delete topic "${topic.name}"?`})
       .subscribe((result) => {
@@ -51,7 +52,14 @@ export class QuizComponent implements OnInit{
         const index = this.topics.findIndex(item=>item.id === topic.id);
         if(index>-1) {
           this.topics.splice(index, 1);
-          this.chRef.detectChanges();
+          this.quiz.topics.push(topic.id);
+          const index2 = this.quiz.topics.indexOf(topic.id);
+          if(index2>-1) {
+            this.quiz.topics.splice(index2, 1);
+            this.quizService.update(this.quiz).then(()=>{
+              this.chRef.detectChanges();
+            });
+          }
         }
       }
     });
