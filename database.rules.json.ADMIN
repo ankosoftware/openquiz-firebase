@@ -1,6 +1,5 @@
 {
   "rules": {
-    ".write": "auth != null",
     "topic": {
       ".read": "auth != null",
       "$topic": {
@@ -13,7 +12,7 @@
       }
     },
     "question": {
-      ".read": "auth != null",
+      ".read": "root.hasChild('superuser/' + auth.uid)",
       "$question": {
         ".read": "auth != null",
         ".write": "root.hasChild('superuser/' + auth.uid) && data.val() === null || data.child('owner').val() === auth.uid",
@@ -35,7 +34,7 @@
       }
     },
     "quizresult": {
-      ".read": "auth != null",
+      ".read": "root.hasChild('superuser/' + auth.uid)",
       "$quizresult": {
         ".read": "auth != null",
         ".write": "root.hasChild('superuser/' + auth.uid) || data.val() === null || data.child('owner').val() === auth.uid",
@@ -46,13 +45,22 @@
       }
     },
     "superuser": {
-      ".read": "auth != null",
       "$superuser": {
         ".read": "root.hasChild('superuser/' + auth.uid) || $superuser === auth.uid",
         ".write": "data.val() === null || data.child('owner').val() === auth.uid",
         ".validate": "newData.hasChildren(['owner'])",
         "owner": {
           ".validate": "newData.isString() && (newData.val() === auth.uid || newData.val() === data.val())"
+        }
+      }
+    },
+    "test": {
+      ".read": "root.hasChild('superuser/' + auth.uid)",
+      "$test": {
+        ".write": "root.hasChild('superuser/' + auth.uid) && (data.val() === null || data.child('owner').val() === auth.uid)",
+        ".validate": "newData.hasChildren(['owner'])",
+        "owner": {
+          ".validate": "newData.isString() && newData.val() === auth.uid"
         }
       }
     }
