@@ -9,25 +9,45 @@
   </div>
   <ul class="nav nav-tabs">
     <li>
-      <a uiSref="admin.quiz_result" [uiParams]="{ quizId: quiz.id }">
+      <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }">
         Questions
       </a>
     </li>
     <li class="active">
-      <a class="active">
+      <a uiSref="admin.quiz_result" [uiParams]="{ quizId: quiz.id }" class="active">
         Results
       </a>
     </li>
   </ul>
 </div>
 <div class="container-fluid">
+  <div class="list-group">
+    <div class="list-group-item">
+      <div class="row-action-primary">
+        <img [image]="quizresult.user.photoURL || ''" style="min-width: 100%" />
+      </div>
+      <div class="row-content">
+        <div class="least-content">
+          {{quizresult.end | date : 'medium'}}
+        </div>
+        <h4 class="list-group-item-heading">
+          {{quizresult.user.displayName || quizresult.user}}
+        </h4>
+
+        <p class="list-group-item-text">
+          {{quizresult.user.email || quizresult.user}}
+        </p>
+      </div>
+    </div>
+    <div class="list-group-separator"></div>
+  </div>
+
   <div class="well well-lg clearfix">
+    <pre>
       {{quizresult | json}}
+    </pre>
   </div>
-  <div class="well well-lg clearfix">
-      score: {{quizresult.score}}
-  </div>
-  <div class="well well-lg clearfix">
+  <div class="well well-lg clearfix" *ngFor="let answer of quizresult.answers.entered">
       score: {{quizresult.score}}
   </div>
   <div class="well well-lg clearfix">
