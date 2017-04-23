@@ -20,6 +20,7 @@
     "@angular/platform-browser": "2.4.0",
     "@angular/platform-browser-dynamic": "2.4.0",
     "@angular/router": "3.4.0",
+    "angular2-markdown": "1.6.0",
     "angularfire2": "2.0.0-beta.8",
     "bootstrap": "3.3.7",
     "bootstrap-material-design": "0.5.10",

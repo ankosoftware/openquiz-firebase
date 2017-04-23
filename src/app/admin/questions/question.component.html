@@ -46,10 +46,15 @@
               </a>
             </div>
           </div>
-          <textarea id="question-content" name="question-content" [(ngModel)]="question.content"
-                    style="width: 100%;" rows="10"></textarea>
+          <div class="row">
+            <div class="col-sm-6">
+              <textarea [(ngModel)]="question.content" name="question-content" style="width:100%;" rows="10"></textarea>
+            </div>
+            <div class="col-sm-6">
+              <markdown [data]="question.content"></markdown>
+            </div>
+          </div>
         </div>
-
       </div>
       <div class="row">
         <div class="col-md-3">

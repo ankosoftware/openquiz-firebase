@@ -14,7 +14,7 @@
       Add Question
     </a>
   </div>
-  <div class="well well-lg">
-    Look, I'm in a large well!
+  <div class="well well-lg" *ngFor="let question of questions">
+    <a uiSref="admin.question_edit" [uiParams]="{quizId: quizId,  topicId: topic.id, questionId: question.id}"><h3>{{question.title}}</h3></a>
   </div>
 </div>

@@ -13,6 +13,7 @@ import { NewQuizComponent } from './quizzes/new/new-quiz.component';
 import { NewTopicComponent } from './topics/new/new-topic.component';
 import { TopicComponent } from './topics/details/topic.component';
 import { QuestionComponent } from './questions/question.component';
+import { MarkdownModule } from 'angular2-markdown';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { QuestionComponent } from './questions/question.component';
     FormsModule,
     BrowserModule,
     GeneralModule,
+    MarkdownModule.forRoot(),
     routing
   ],
   declarations: [
