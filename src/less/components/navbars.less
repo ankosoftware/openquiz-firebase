@@ -91,7 +91,22 @@
       padding-right: 20px;
       text-transform: uppercase;
       color: fade(white, 86%) !important;
-      letter-spacing: -.005em;
+
+      &.active {
+        color: white !important;
+        position: relative;
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          height: 2px;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: white;
+        }
+      }
     }
   }
 }
