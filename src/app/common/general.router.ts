@@ -24,7 +24,8 @@ export const states = [
       deps: [AuthService],
       resolveFn: resolveUser
     }]
-  }
+  },
+
 ];
 
 export const routing: ModuleWithProviders = UIRouterModule.forChild({states});

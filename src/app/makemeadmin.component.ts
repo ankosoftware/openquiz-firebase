@@ -41,8 +41,8 @@ export class MakeMeAdminComponent implements OnInit {
     su.displayName = this.user.displayName;
     su.email = this.user.email;
     this.superuserService.updateById(this.user.uid, su).then(() => {
-      console.log('Admin crefated');
-      this.uiRouter.stateService.go('login');
+      console.log('Admin created');
+      this.uiRouter.stateService.go('admin');
     });
   }
 }

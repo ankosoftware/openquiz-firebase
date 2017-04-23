@@ -169,8 +169,15 @@
   </div>
 
   <div *ngIf="state === 'completed'">
-    <h1 class="text-center text-info">
-      Congratulations!
-    </h1>
+    <div class="container">
+      <div class="well well-lg">
+        <h2 class="text-center text-info">
+          Congratulations!
+        </h2>
+        <p class="text-center h4">
+        See your <a uiSref="admin.quiz_result_details" [uiParams]="{ quizId: quiz.id, quizresultId: result.id }">result</a>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
