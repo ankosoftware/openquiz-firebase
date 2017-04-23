@@ -1,21 +1,38 @@
-<h1>OpenQuiz admin section</h1>
-<h2>
-  In order to manage quizzes you need to be admin, please foollow instructions below, to become administrator.
-</h2>
-<div *ngIf="!user">
-  <p>
-    You are not authorized.
-    <a uiSref="login">Go to login page</a>
-  </p>
-</div>
-<div *ngIf="!!user">
-  <div *ngIf="!!superuser">
-    You are already admin.
-    <a uiSref="admin">Go to admin page</a>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" uiSref="home">
+        Open Quiz
+      </a>
+    </div>
   </div>
-  <div *ngIf="!superuser">
+</nav>
+<div class="container">
+  <br>
+  <br>
+  <br>
+<div class="well well-lg">
+  <h1>OpenQuiz admin section</h1>
+  <h5>
+    In order to manage quizzes you need to be admin, please foollow instructions below, to become administrator.
+  </h5>
+  <div *ngIf="!user">
     <p>
-      <button (click)="makeMeAdmin()">Make me admin, please.</button>
+      You are not authorized.
+      <a uiSref="login">Go to login page</a>
     </p>
   </div>
+  <div *ngIf="!!user">
+    <div *ngIf="!!superuser">
+      You are already admin.
+      <a uiSref="admin">Go to admin page</a>
+    </div>
+    <div *ngIf="!superuser">
+      <p>
+        <button class="btn btn-success" (click)="makeMeAdmin()">Make me admin, please.</button>
+      </p>
+    </div>
+  </div>
 </div>
+</div>
+
