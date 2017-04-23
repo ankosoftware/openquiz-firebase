@@ -51,7 +51,7 @@ export abstract class FirebaseService<T extends Base> {
   protected onCatch(err: any, caught?: any) {
     console.log('DB Error', err);
     if (err && err.code === "PERMISSION_DENIED") {
-      this.uiRouter.stateService.go('login');
+      this.uiRouter.stateService.go('login', {source: window.location.href.indexOf('source')<0 ? window.location.href : window.location.href.substring(window.location.href.indexOf('source')+7)});
     }
   }
 

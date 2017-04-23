@@ -3,6 +3,7 @@ import {UIRouter, uiRouterFactory} from "ui-router-ng2";
 import {AuthService} from "../firebase/services/auth.service";
 import {User} from "../model/user.model";
 import { MaterialComponent } from "../components/material/material.component";
+import { Transition } from "ui-router-core/lib";
 
 @Component({
   inputs:['user'],
@@ -10,13 +11,18 @@ import { MaterialComponent } from "../components/material/material.component";
 })
 export class LoginComponent extends MaterialComponent implements OnInit {
   @Input() user: User;
-  constructor(private authService: AuthService, protected uiRouter: UIRouter ) {
+  constructor(private authService: AuthService, protected uiRouter: UIRouter, protected transition: Transition) {
     super();
   }
   ngOnInit(): void {
     if(this.user) {
-      console.log(this.user);
-      this.uiRouter.stateService.go('admin');
+      if(this.transition.params().source) {
+        debugger;
+        window.location.href = decodeURIComponent(this.transition.params().source);
+      }
+      else {
+        this.uiRouter.stateService.go('admin');
+      }
     }
   }
   loginGoogle() {

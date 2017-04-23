@@ -4,6 +4,7 @@ import {ModuleWithProviders} from "@angular/core";
 import {LoginComponent} from "./login/login.component";
 import {AuthService} from "./firebase/services/auth.service";
 
+
 export function resolveUser(authService: AuthService) {
   return authService.getUser();
 }
@@ -16,7 +17,7 @@ export const states = [
   },
   {
     name:'login',
-    url:'/login',
+    url:'/login?:source',
     component: LoginComponent,
     resolve: [{
       token: 'user',

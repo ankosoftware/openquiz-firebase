@@ -23,13 +23,13 @@ export class ImageDirective implements OnChanges {
       return;
     }
     this.prevImage = this.image;
-    el.src = 'assets/img/loader.svg';
+    el.src = 'assets/images/loader.svg';
     const image = new Image();
     image.onload = () => {
       el.src = this.image;
     };
     image.onerror = () => {
-      el.src = 'assets/img/no-image.svg';
+      el.src = 'assets/images/no-image.svg';
     };
     image.src = this.image;
   }

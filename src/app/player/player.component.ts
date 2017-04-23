@@ -10,6 +10,7 @@ import {QuestionService} from "../common/firebase/services/question.service";
 import {QuizResultService} from "../common/firebase/services/quizresult.service";
 import {Observable} from "rxjs/Rx";
 import {QuizResult, ResultAnswer} from "../common/model/quizresult.model";
+import { Transition } from "ui-router-core/lib";
 
 @Component({
   inputs: ['user', 'quiz'],
@@ -35,17 +36,19 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
               private topicService: TopicService,
               private questionService: QuestionService,
               private quizResultService: QuizResultService,
-              private chRef: ChangeDetectorRef) {
+              private chRef: ChangeDetectorRef,
+              protected transition: Transition
+  ) {
     super();
   }
 
   ngOnInit(): void {
     if(!this.user) {
-      this.uiRouter.stateService.go('login');
+      this.uiRouter.stateService.go('login', {source: this.transition.params().source || window.location.href});
     }
     this.topicService.getList(this.quiz.topics).then((topics) => {
       this.topics = topics;
-      const requests = this.topics.map((topic)=>{
+      const requests = this.topics.map((topic)=> {
         return this.questionService.randomQuestions(topic.numberOfQuestions, {orderByChild:'topicId', equalTo:topic.id})
       });
       Promise.all(requests).then((_questions:any)=>{
