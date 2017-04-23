@@ -83,4 +83,7 @@ export abstract class FirebaseService<T extends Base> {
   remove(key: string): Thenable<void> {
     return key && this.items().remove(key).catch(err => this.onCatch(err));
   }
+  query(): firebase.database.Query {
+    return this.db.list(this.url).$ref;
+  }
 }
