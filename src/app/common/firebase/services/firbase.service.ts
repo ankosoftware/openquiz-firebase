@@ -58,7 +58,7 @@ export abstract class FirebaseService<T extends Base> {
         ? json.splice(skiped, limited) : json.splice(skiped)
         : json;
       return {
-        data: data,
+        data: this.arrayToModel(data),
         length: length
       }
     }).catch((err, caught) => this.errorHandler(err, caught)).first().toPromise();
