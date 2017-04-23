@@ -1,10 +1,13 @@
 import uuid from "uuid";
 import {Base} from "./base.model";
 import {IQuestionAnswer} from "./question.model";
+import {IUser} from "./user.model";
 
 export class ResultAnswer extends Base {
   question: string; // id
   entered: IQuestionAnswer[]; // entered answers
+  correct: boolean;
+  score: number;
 
   constructor(json?: any) {
     super(json);
@@ -15,7 +18,7 @@ export class ResultAnswer extends Base {
 export class QuizResult extends Base {
 
   quiz: string; // id
-  user: string; // email, owner email
+  user: IUser; // owner details
   start: Date;
   end: Date;
   answers: ResultAnswer[];
