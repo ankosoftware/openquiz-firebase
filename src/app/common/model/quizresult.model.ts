@@ -26,5 +26,4 @@ export class QuizResult extends Base {
     super(json);
     this.answers = this.answers || [];
   }
-
 }

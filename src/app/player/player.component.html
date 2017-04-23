@@ -35,9 +35,36 @@
       </p>
     </div>
     <div *ngIf="state === 'started'">
+      <div class="pull-right">
+        {{currentQuestionIndex}}/{{questions.length}}
+      </div>
+      <div>
+        <div>
+          {{currentQuestion}}
+          {{currentQuestion.questionType}}
+          <div *ngIf="currentQuestion.questionType == 'text'">
+            {{currentQuestion.content}}
+          </div>
+          <div *ngIf="currentQuestion.questionType == 'image'">
+            <img [image]="currentQuestion.content"/>
+          </div>
+          <div *ngIf="currentQuestion.questionType == 'md'">
+            <div class="row">
+                <markdown [data]="currentQuestion.content"></markdown>
+            </div>
+          </div>
+        </div>
+        <div>
 
+        </div>
+      </div>
+      <ul class="pager">
+        <li class="previous" *ngIf="currentQuestionIndex!==questions.length-1"><a (click)="skip()">Skip</a></li>
+        <li class="next" *ngIf="currentQuestionIndex!==questions.length-1" ><a class="withripple" (click)="next()">Next →</a></li>
+        <li class="next" *ngIf="currentQuestionIndex===questions.length-1"><a class="withripple" (click)="finish()">Finish</a></li>
+      </ul>
     </div>
     <div *ngIf="state === 'completed'">
-
+      <h1>Congratulations!</h1>
     </div>
 </div>

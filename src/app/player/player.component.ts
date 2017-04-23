@@ -26,6 +26,8 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
   started: Date = null;
   timeLeft: number = null;
   private result: QuizResult;
+  currentQuestion:Question = null;
+  currentQuestionIndex:number = 0;
 
   constructor(protected uiRouter: UIRouter,
               private topicService: TopicService,
@@ -45,14 +47,16 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
         return this.questionService.randomQuestions(topic.numberOfQuestions, {orderByChild:'topicId', equalTo:topic.id})
       });
       Promise.all(requests).then((_questions:any)=>{
-        this.questions = this.questions.concat(_questions);
-          //this.chRef.detectChanges();
+        _questions.forEach((items)=> {
+          this.questions = this.questions.concat(items);
+        })
       })
     });
   }
 
   start() {
-    this.state = 'started';
+    debugger;
+    this.currentQuestion = this.questions[this.currentQuestionIndex];
     this.started = new Date();
     this.result = new QuizResult();
     this.result.start = this.started;
@@ -68,6 +72,16 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
         }
       });
     }
+    this.state = 'started';
+  }
+  next() {
+    this.currentQuestion = this.questions[++this.currentQuestionIndex];
+  }
+  finish() {
+    this.complete();
+  }
+  skip() {
+    this.currentQuestion = this.questions[++this.currentQuestionIndex];
   }
 
   answer(question: Question, entered: IQuestionAnswer[]) {
