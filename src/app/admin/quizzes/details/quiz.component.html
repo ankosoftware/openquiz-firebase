@@ -1,10 +1,10 @@
-<div class="jumbotron">
+<div class="jumbotron margin-vertical-0">
   <div class="container-fluid">
     <h3>
       {{quiz.name}}
     </h3>
     <p>
-      Some description
+      {{quiz.description}}
     </p>
   </div>
   <ul class="nav nav-tabs">
@@ -21,21 +21,29 @@
   </ul>
 </div>
 <div class="container-fluid">
-  <button type="button" class="btn btn-raised btn-primary" (click)="editTopic()">
-    Add Topic
-  </button>
-  <div class="well well-lg row" *ngFor="let topic of topics">
-    <div class="col-md-10">
-      <a uiSref="admin.topic" [uiParams]="{ quizId: quiz.id, topicId: topic.id }"><h3>{{topic.name}}</h3></a>
-      <p>{{topic.description}}</p>
-    </div>
-    <div class="col-md-2">
-      <button type="button" class="btn btn-default btn-sm" (click)="editTopic(topic)">
-        Edit
-      </button>
-      <button type="button" class="btn btn-default btn-sm" (click)="deleteTopic(topic)">
-        Delete
-      </button>
+  <div class="margin-vertical-10">
+    <button type="button" class="btn btn-raised btn-primary btn-sm" (click)="editTopic()">
+      Add Topic
+    </button>
+  </div>
+  <div class="well well-lg" *ngFor="let topic of topics">
+    <div class="row">
+      <div class="col-md-10">
+        <h4 class="margin-vertical-0">
+          <a uiSref="admin.topic" [uiParams]="{ quizId: quiz.id, topicId: topic.id }">
+            {{topic.name}}
+          </a>
+        </h4>
+        <p>{{topic.description}}</p>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-sm" (click)="editTopic(topic)">
+          Edit
+        </button>
+        <button type="button" class="btn btn-default btn-sm" (click)="deleteTopic(topic)">
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </div>

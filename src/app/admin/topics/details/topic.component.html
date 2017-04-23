@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron margin-vertical-0">
   <div class="container-fluid">
     <h3>
       {{topic.name}}
@@ -9,10 +9,12 @@
   </div>
 </div>
 <div class="container-fluid">
-  <a class="btn btn-raised btn-primary" uiSref="admin.question" [uiParams]="{quizId: quizId, topicId: topic.id}">
-    Add Question
-  </a>
-  <div class="well well-lg" >
+  <div class="margin-vertical-10">
+    <a class="btn btn-raised btn-primary btn-sm" uiSref="admin.question" [uiParams]="{ quizId: quizId,  topicId: topic.id}">
+      Add Question
+    </a>
+  </div>
+  <div class="well well-lg">
     Look, I'm in a large well!
   </div>
 </div>

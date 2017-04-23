@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { QuestionService } from '../../common/firebase/services/question.service';
 import { Question, QuestionType, QuestionAnswer } from '../../common/model/question.model';
+import { MaterialComponent } from "../../common/components/material/material.component";
 
 @Component({
   templateUrl: './question.component.html'
 })
-export class QuestionComponent {
+export class QuestionComponent extends MaterialComponent {
   question: Question | any = {
     type: QuestionType.single
   };
@@ -15,7 +16,9 @@ export class QuestionComponent {
 
   constructor(
     protected questionService: QuestionService
-  ) {}
+  ) {
+    super();
+  }
 
   onControlsChanged(index: number) {
     if (this.question.type === QuestionType.single) {

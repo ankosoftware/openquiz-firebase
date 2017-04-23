@@ -14,38 +14,28 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li>
+        <li uiSrefActive="active">
           <a uiSref="admin.dashboard">
             Dashboard
           </a>
         </li>
-        <li>
+        <li uiSrefActive="active">
           <a uiSref="admin.quizzes">
             Quizzes
           </a>
         </li>
-        <li>
+        <li uiSrefActive="active">
           <a uiSref="admin.results">
             Results
           </a>
         </li>
-        <li>
-          <a (click)="logout()">
-            Logout
-          </a>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
+        <li class="dropdown user-dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span class="btn-group-sm">
-              <span class="btn btn-default btn-fab" style="padding: 0">
-                <img style="width:40px;" src="{{user.photoURL}}" alt="icon">
-              </span>
+            <span class="user-avatar">
+              <img src="{{user.photoURL}}" alt="icon">
             </span>
-
-            {{user.displayName}}
-            <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li><a (click)="logout()">logout</a></li>

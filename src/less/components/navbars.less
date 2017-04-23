@@ -4,9 +4,57 @@
                 0 3px 3px -2px rgba(0, 0, 0, 0.12),
                 0 1px 8px 0 rgba(0, 0, 0, 0.2);
   }
+
+  &-brand {
+    height: @navbar-height !important;
+    line-height: 1 !important;
+    color: white !important;
+    letter-spacing: -.025em;
+  }
+
+  .nav.navbar-nav {
+    & > li > a {
+      padding-top: 14px;
+      padding-bottom: 14px;
+      font-size: .9em;
+      font-weight: 600;
+    }
+
+    .user-dropdown {
+      .dropdown-toggle {
+        @avatar-size: 34px;
+        padding: ((@navbar-height - @avatar-size) / 2) 0;
+
+        .user-avatar {
+          display: block;
+          width: @avatar-size;
+          height: @avatar-size;
+          overflow: hidden;
+          border-radius: @avatar-size / 2;
+          line-height: 0;
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }
 
 .nav-tabs {
   background-color: transparent;
   border-bottom: 0;
+
+  & > li {
+    margin: 0;
+
+    & > a {
+      padding-left: 20px;
+      padding-right: 20px;
+      text-transform: uppercase;
+      color: fade(white, 86%) !important;
+      letter-spacing: -.005em;
+    }
+  }
 }

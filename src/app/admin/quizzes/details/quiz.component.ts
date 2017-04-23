@@ -6,15 +6,23 @@ import {Topic} from "../../../common/model/topic.model";
 import {QuizService} from "../../../common/firebase/services/quiz.service";
 import {TopicService} from "../../../common/firebase/services/topic.service";
 import {ConfirmComponent} from "../../../common/components/confirm/confirm.component";
+import { MaterialComponent } from "../../../common/components/material/material.component";
 
 @Component({
   inputs: ['quiz'],
   templateUrl: './quiz.component.html'
 })
-export class QuizComponent implements OnInit{
+export class QuizComponent extends MaterialComponent implements OnInit{
   @Input() quiz: Quiz;
   topics: Topic[] = [];
-  constructor(protected dialogService: DialogService, private quizService: QuizService, private topicService:TopicService, private chRef: ChangeDetectorRef) {}
+  constructor(
+    protected dialogService: DialogService,
+    private quizService: QuizService,
+    private topicService:TopicService,
+    private chRef: ChangeDetectorRef
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.topicService.getList(this.quiz.topics).then((topics) => {

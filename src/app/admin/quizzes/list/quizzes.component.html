@@ -1,11 +1,15 @@
 <div class="jumbotron">
   <div class="container-fluid">
-    <h3 class="pull-left">
-      Quizzes
-    </h3>
-    <button type="button" class="btn btn-raised btn-default pull-right" (click)="editQuiz()">
-      New Quiz
-    </button>
+    <div class="row margin-top-10">
+      <h3 class="col-lg-10">
+        Quizzes
+      </h3>
+      <div class="col-lg-2 text-right">
+        <button type="button" class="btn btn-raised btn-default" (click)="editQuiz()">
+          New Quiz
+        </button>
+      </div>
+    </div>
   </div>
   <ul class="nav nav-tabs">
     <li>
@@ -29,9 +33,11 @@
   <div class="well well-lg" *ngFor="let quiz of quizzes">
     <div class="row">
       <div class="col-md-10">
-        <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }">
-          <h3>{{quiz.name}}</h3>
-        </a>
+        <h4 class="margin-vertical-0">
+          <a uiSref="admin.quiz" [uiParams]="{ quizId: quiz.id }">
+            {{quiz.name}}
+          </a>
+        </h4>
         <p>{{quiz.description}}</p>
       </div>
       <div class="col-md-2 text-right">

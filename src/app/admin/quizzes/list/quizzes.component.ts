@@ -5,18 +5,26 @@ import { NewQuizComponent } from '../new/new-quiz.component';
 import {Quiz} from "../../../common/model/quiz.model";
 import {QuizService} from "../../../common/firebase/services/quiz.service";
 import {ConfirmComponent} from "../../../common/components/confirm/confirm.component";
+import { MaterialComponent } from "../../../common/components/material/material.component";
 
 @Component({
   inputs: ['quizzes'],
   templateUrl: './quizzes.component.html'
 })
-export class QuizzesComponent implements OnInit{
+export class QuizzesComponent extends MaterialComponent implements OnInit{
   ngOnInit(): void {
     console.log(this.quizzes)
   }
 
   @Input() quizzes: Quiz[] = [];
-  constructor(protected dialogService: DialogService, protected quizService: QuizService, private chRef: ChangeDetectorRef, protected uiRouter: UIRouter) {}
+  constructor(
+    protected dialogService: DialogService,
+    protected quizService: QuizService,
+    private chRef: ChangeDetectorRef,
+    protected uiRouter: UIRouter
+  ) {
+    super();
+  }
 
   editQuiz(quiz:Quiz=new Quiz()) {
 
