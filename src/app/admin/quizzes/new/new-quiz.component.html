@@ -11,7 +11,7 @@
           </h4>
         </div>
         <div class="modal-body padding-top-15">
-          <div class="form-group label-floating" [class.is-empty]="!name">
+          <div class="form-group label-floating" [class.is-empty]="!name" [class.has-error]="form.submitted && !quizName.valid">
             <label class="control-label" for="quiz-name">
               Quiz Name
             </label>
@@ -22,6 +22,7 @@
               id="quiz-name"
               name="quiz-name"
               [(ngModel)]="name"
+              #quizName="ngModel"
             >
           </div>
           <div class="form-group">
@@ -32,7 +33,7 @@
                       [(ngModel)]="description"></textarea>
           </div>
 
-          <div class="form-group label-floating" [class.is-empty]="!totalTimeLimit">
+          <div class="form-group label-floating" [class.is-empty]="!totalTimeLimit" [class.has-error]="form.submitted && !timeLimit.valid">
             <label class="control-label" for="time-limit">
               Time Limit (minutes)
             </label>
@@ -42,9 +43,12 @@
               id="time-limit"
               name="time-limit"
               [(ngModel)]="totalTimeLimit"
+              max="1440"
+              min="0"
+              #timeLimit="ngModel"
             >
           </div>
-          <div class="form-group label-floating" [class.is-empty]="!passScore">
+          <div class="form-group label-floating" [class.is-empty]="!passScore" [class.has-error]="form.submitted && !score.valid">
             <label class="control-label" for="pass-score">
               Pass Score
             </label>
@@ -54,6 +58,8 @@
               id="pass-score"
               name="pass-score"
               [(ngModel)]="passScore"
+              min="0"
+              #score="ngModel"
             >
           </div>
           <div class="checkbox">

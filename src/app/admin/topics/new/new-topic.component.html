@@ -11,7 +11,7 @@
           </h4>
         </div>
         <div class="modal-body padding-top-15">
-          <div class="form-group label-floating" [class.is-empty]="!name">
+          <div class="form-group label-floating" [class.is-empty]="!name" [class.has-error]="form.submitted && !topicName.valid">
             <label class="control-label" for="topic-name">
               Topic Name
             </label>
@@ -21,6 +21,8 @@
               id="topic-name"
               name="topic-name"
               [(ngModel)]="name"
+              required
+              #topicName="ngModel"
             >
           </div>
           <div class="form-group">
@@ -30,19 +32,22 @@
             <textarea class="form-control" id="description" name="description"
                       [(ngModel)]="description"></textarea>
           </div>
-          <div class="form-group label-floating" [class.is-empty]="!questionTimeLimit">
+          <div class="form-group label-floating" [class.is-empty]="!questionTimeLimit" [class.has-error]="form.submitted && !timeLimit.valid">
             <label class="control-label" for="question-time-limit">
               Question Time Limit (minutes)
             </label>
             <input
               class="form-control"
-              type="text"
+              type="number"
               id="question-time-limit"
               name="question-time-limit"
               [(ngModel)]="questionTimeLimit"
+              max="1440"
+              min="0"
+              #timeLimit="ngModel"
             >
           </div>
-          <div class="form-group label-floating" [class.is-empty]="!numberOfQuestions">
+          <div class="form-group label-floating" [class.is-empty]="!numberOfQuestions" [class.has-error]="form.submitted && !numberQuestions.valid">
             <label class="control-label" for="number-of-questions">
               Number of Questions
             </label>
@@ -52,9 +57,11 @@
               id="number-of-questions"
               name="number-of-questions"
               [(ngModel)]="numberOfQuestions"
+              min="0"
+              #numberQuestions="ngModel"
             >
           </div>
-          <div class="form-group label-floating" [class.is-empty]="!pointsPerQuestion">
+          <div class="form-group label-floating" [class.is-empty]="!pointsPerQuestion" [class.has-error]="form.submitted && !points.valid">
             <label class="control-label" for="point-per-question">
               Points per Question
             </label>
@@ -64,6 +71,8 @@
               id="point-per-question"
               name="point-per-question"
               [(ngModel)]="pointsPerQuestion"
+              min="0"
+              #points="ngModel"
             >
           </div>
           <div class="checkbox">
