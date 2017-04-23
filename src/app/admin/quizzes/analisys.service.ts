@@ -28,6 +28,7 @@ export class AnalisysServices {
             if (!question) {
               return;
             }
+            answ.questionDetails = question;
             return this.topicService.get(question.topicId).first().toPromise().then(topic => {
               answ.correct = AnalisysServices.isCorrect(question, answ);
               let questionScore = topic && topic.pointsPerQuestion && +topic.pointsPerQuestion || 1;
