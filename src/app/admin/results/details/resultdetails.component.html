@@ -4,7 +4,7 @@
       {{quiz.name}}
     </h3>
     <p>
-      {{quiz.description}}
+      {{quizresult | json}}
     </p>
   </div>
   <ul class="nav nav-tabs">
@@ -65,7 +65,7 @@
         <td>
           <ul class="list-unstyled">
             <li *ngFor="let enteredAnswer of answer.entered">
-              <p [class.text-danger]="!answer._correct" [class.text-success]="answer._correct">
+              <p [class.text-danger]="!answer.correct" [class.text-success]="answer.correct">
                 {{enteredAnswer.title || enteredAnswer.value}}
               </p>
             </li>
