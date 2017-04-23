@@ -7,11 +7,11 @@
             ×
           </button>
           <h4 class="modal-title">
-            New Topic
+            {{!id ? 'New' : 'Edit'}} Topic
           </h4>
         </div>
         <div class="modal-body padding-top-15">
-          <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating" [class.is-empty]="!name">
             <label class="control-label" for="topic-name">
               Topic Name
             </label>
@@ -80,8 +80,8 @@
           <button type="button" class="btn btn-default" (click)="close()">
             Close
           </button>
-          <button type="submit"  class="btn btn-raised btn-primary">
-            Create Topic
+          <button type="submit" [disabled]="!isOwner && !!id" class="btn btn-raised btn-primary">
+            {{!id ? 'Create' : 'Save'}} Topic
           </button>
         </div>
       </form>

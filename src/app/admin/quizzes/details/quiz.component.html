@@ -22,7 +22,7 @@
 </div>
 <div class="container-fluid">
   <div class="margin-vertical-10">
-    <button type="button" class="btn btn-raised btn-primary btn-sm" (click)="editTopic()">
+    <button type="button" [disabled]="!quiz || !quiz.isOwner" class="btn btn-raised btn-primary btn-sm" (click)="editTopic()">
       Add Topic
     </button>
   </div>
@@ -37,10 +37,10 @@
         <p>{{topic.description}}</p>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-default btn-sm" (click)="editTopic(topic)">
+        <button type="button" [disabled]="!topic.isOwner" class="btn btn-default btn-sm" (click)="editTopic(topic)">
           Edit
         </button>
-        <button type="button" class="btn btn-default btn-sm" (click)="deleteTopic(topic)">
+        <button type="button" [disabled]="!topic.isOwner" class="btn btn-default btn-sm" (click)="deleteTopic(topic)">
           Delete
         </button>
       </div>

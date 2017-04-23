@@ -1,20 +1,10 @@
 import { Component } from '@angular/core';
+import { MaterialComponent } from "../common/components/material/material.component";
 
 @Component({
   selector: 'landing',
-  template: `
-    <h1>OpenQuiz</h1>
-    <p>
-      bla-bla
-    </p>
-    <p>
-      <a uiSref="login">login</a>
-    </p>
-    <p>
-      <a uiSref="makemeadmin">Make me admin</a>
-    </p>
-  `
+  templateUrl: './landing.component.html'
 })
-export class LandingComponent  {
+export class LandingComponent extends MaterialComponent {
 
 }

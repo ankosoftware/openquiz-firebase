@@ -7,6 +7,8 @@ import {MaterialComponent} from "../../common/components/material/material.compo
 import {UIRouter} from "ui-router-ng2";
 import {StorageService} from "../../common/firebase/services/storage.service";
 import uuid from "uuid";
+import {Topic} from "../../common/model/topic.model";
+import {Quiz} from "../../common/model/quiz.model";
 
 @Component({
   inputs:['question'],
@@ -117,5 +119,9 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
         });
       });
     }
+  }
+
+  isOwner():boolean {
+    return this.question && (this.question.isOwner || !this.question.id);
   }
 }
