@@ -22,27 +22,37 @@
 </div>
 <div class="container-fluid">
   <div class="margin-vertical-10">
-    <button type="button" [disabled]="!quiz || !quiz.isOwner" class="btn btn-raised btn-primary btn-sm" (click)="editTopic()">
+    <button type="button" [disabled]="!quiz || !quiz.isOwner" class="btn btn-raised btn-primary btn-sm"
+            (click)="editTopic()">
       Add Topic
     </button>
   </div>
-  <div class="well well-lg" *ngFor="let topic of topics">
-    <div class="row">
-      <div class="col-md-10">
-        <h4 class="margin-vertical-0">
-          <a uiSref="admin.topic" [uiParams]="{ quizId: quiz.id, topicId: topic.id }">
-            {{topic.name}}
-          </a>
-        </h4>
-        <p>{{topic.description}}</p>
-      </div>
-      <div class="col-md-2">
-        <button type="button" [disabled]="!topic.isOwner" class="btn btn-default btn-sm" (click)="editTopic(topic)">
-          Edit
+  <div class="well well-lg clearfix" *ngFor="let topic of topics">
+    <div class="pull-left">
+      <h4 class="margin-vertical-0">
+        <a uiSref="admin.topic" [uiParams]="{ quizId: quiz.id, topicId: topic.id }">
+          {{topic.name}}
+        </a>
+      </h4>
+      <p>{{topic.description}}</p>
+    </div>
+    <div class="pull-right" *ngIf="topic.isOwner">
+      <div class="btn-group">
+        <button type="button" class="btn btn-fab btn-primary btn-fab-mini dropdown-toggle" data-toggle="dropdown">
+          <i class="material-icons">&#xE5D4;</i>
         </button>
-        <button type="button" [disabled]="!topic.isOwner" class="btn btn-default btn-sm" (click)="deleteTopic(topic)">
-          Delete
-        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <a role="button" (click)="editTopic(topic)">
+              Edit
+            </a>
+          </li>
+          <li *ngIf="quiz.isOwner">
+            <a role="button" class="text-danger" (click)="deleteTopic(topic)">
+              Delete
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
