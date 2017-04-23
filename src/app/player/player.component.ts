@@ -75,7 +75,8 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
     }
     this.state = 'started';
   }
-  next() {
+
+  sendAnswer() {
     switch(this.currentQuestion.answerType) {
       case 'single_select':
         this.answer(this.currentQuestion, [this.currentQuestion.answers.find(item=>item.id==this.selectedAnswer)]);
@@ -89,9 +90,14 @@ export class PlayerComponent extends MaterialComponent implements OnInit {
     }
     this.selectedAnswer = null;
     this.answerText = null;
+  }
+
+  next() {
+    this.sendAnswer();
     this.currentQuestion = this.questions[++this.currentQuestionIndex];
   }
   finish() {
+    this.sendAnswer();
     this.complete();
   }
   skip() {
