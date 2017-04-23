@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 
 import { routing } from './app.router';
+import {MakeMeAdminComponent} from "./makemeadmin.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent
+    LandingComponent,
+    MakeMeAdminComponent
   ],
   imports: [
     BrowserModule,

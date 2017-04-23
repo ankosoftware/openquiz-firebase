@@ -4,6 +4,7 @@ import {Transition} from "ui-router-core/lib";
 import { QuestionService } from '../../common/firebase/services/question.service';
 import {Question, QUESTION_TYPE, ANSWER_TYPE, QuestionAnswer} from '../../common/model/question.model';
 import {MaterialComponent} from "../../common/components/material/material.component";
+import {UIRouter} from "ui-router-ng2";
 
 @Component({
   inputs:['question'],
@@ -15,7 +16,7 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
 
   selectedAnswer: string;
 
-  constructor(protected questionService: QuestionService, private transition: Transition) {
+  constructor(protected questionService: QuestionService, private transition: Transition, private uiRouter: UIRouter) {
     super();
   }
 
@@ -33,9 +34,6 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
             answer._correct = !!this.question.correctAnswer.find((corAnswer)=> corAnswer.id == answer.id)
           });
           break;
-      }
-      if(this.question.answerType=='single_select') {
-
       }
     }
   }
@@ -87,8 +85,20 @@ export class QuestionComponent extends MaterialComponent implements OnInit{
     if (!form.valid) {
       return;
     }
-    this.questionService.create(this.question).then(() => {
-      window.history.back();
-    });
+    if(this.question.id) {
+      this.questionService.update(this.question).then(() => {
+        this.uiRouter.stateService.go('admin.topic', {
+          quizId: this.transition.params().quizId,
+          topicId: this.transition.params().topicId
+        });
+      });
+    } else {
+      this.questionService.create(this.question).then(() => {
+        this.uiRouter.stateService.go('admin.topic', {
+          quizId: this.transition.params().quizId,
+          topicId: this.transition.params().topicId
+        });
+      });
+    }
   }
 }

@@ -11,7 +11,7 @@ export abstract class Base implements IBase {
   }
 
   toJSON(): any {
-    let obj = {};
+    let obj:any = {};
     Object.assign(obj, this);
     for (let key in obj) {
       if (!obj[key]) {
@@ -21,6 +21,8 @@ export abstract class Base implements IBase {
         delete obj[key];
       }
     }
+    delete obj.id;
+
     return obj;
   }
 }

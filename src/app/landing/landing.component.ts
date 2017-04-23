@@ -10,6 +10,9 @@ import { Component } from '@angular/core';
     <p>
       <a uiSref="login">login</a>
     </p>
+    <p>
+      <a uiSref="makemeadmin">Make me admin</a>
+    </p>
   `
 })
 export class LandingComponent  {
