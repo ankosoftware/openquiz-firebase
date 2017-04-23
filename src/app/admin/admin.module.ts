@@ -37,7 +37,9 @@ import {AnalisysServices} from "./quizzes/analisys.service";
     TopicComponent,
     QuestionComponent,
     ResultsComponent,
-    ResultDetailsComponent,
+    ResultDetailsComponent
+  ],
+  providers: [
     AnalisysServices
   ],
   entryComponents: [
